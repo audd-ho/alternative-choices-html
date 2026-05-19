@@ -74,6 +74,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       display: none;
+      z-index: 10;
     }
     .reset-btn:hover { background: rgba(255,255,255,0.8); color: rgba(80,50,50,0.6); border-color: rgba(80,50,50,0.2); }
 
@@ -95,7 +96,7 @@
     }
 
     /* Keep centre content above */
-    h1, p, .upload-area, .links, .reset-btn {
+    h1, p, .upload-area, .links {
       position: relative;
       z-index: 1;
     }
