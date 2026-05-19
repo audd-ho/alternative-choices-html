@@ -83,16 +83,13 @@
       gap: 0;
     }
 
-    /* Column headers (person names) */
+    /* Column headers (person names) - sits above scroll area */
     .table-header {
       display: grid;
       grid-template-columns: 1fr 120px 1fr;
       gap: 0;
-      margin-bottom: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 12px 0;
+      padding: 12px 32px;
+      flex-shrink: 0;
     }
 
     .col-header {
@@ -572,12 +569,12 @@
               ${Array.from({length: totalSteps}, (_, i) => `<div class="dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('')}
             </div>
           </div>
+          <div class="table-header">
+            <div class="col-header person-a">${avatarA} ${personA.name} <span style="font-weight:400; font-size:0.75rem; opacity:0.7;">· ${personA.tagline}</span></div>
+            <div class="col-header center-label">vs</div>
+            <div class="col-header person-b">${avatarB} ${personB.name} <span style="font-weight:400; font-size:0.75rem; opacity:0.7;">· ${personB.tagline}</span></div>
+          </div>
           <div class="table-container">
-            <div class="table-header">
-              <div class="col-header person-a">${avatarA} ${personA.name} <span style="font-weight:400; font-size:0.75rem; opacity:0.7;">· ${personA.tagline}</span></div>
-              <div class="col-header center-label">vs</div>
-              <div class="col-header person-b">${avatarB} ${personB.name} <span style="font-weight:400; font-size:0.75rem; opacity:0.7;">· ${personB.tagline}</span></div>
-            </div>
             ${rowsHtml}
           </div>
           <div class="bottom-nav">
