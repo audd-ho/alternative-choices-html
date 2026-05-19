@@ -125,9 +125,9 @@
     }
 
     /* Gradients that fade into the page background at top and bottom — no hard edges */
-    .pb-before { background: linear-gradient(180deg, #fffaf5 0%, #ffe8d8 20%, #ffd8c4 50%, #ffe8d8 80%, #fffaf5 100%); }
-    .pb-present { background: linear-gradient(180deg, #fffaf5 0%, #e8f4ff 20%, #d8ecff 50%, #e8f4ff 80%, #fffaf5 100%); }
-    .pb-decide { background: linear-gradient(180deg, #fffaf5 0%, #f0e6ff 20%, #e8daff 50%, #f0e6ff 80%, #fffaf5 100%); }
+    .pb-before { background: linear-gradient(180deg, transparent 0%, rgba(255,220,200,0.4) 30%, rgba(255,210,190,0.5) 50%, rgba(255,220,200,0.4) 70%, transparent 100%); }
+    .pb-present { background: linear-gradient(180deg, transparent 0%, rgba(200,230,255,0.4) 30%, rgba(190,220,255,0.5) 50%, rgba(200,230,255,0.4) 70%, transparent 100%); }
+    .pb-decide { background: linear-gradient(180deg, transparent 0%, rgba(230,215,255,0.4) 30%, rgba(220,200,255,0.5) 50%, rgba(230,215,255,0.4) 70%, transparent 100%); }
 
     /* === SCROLL NARRATIVE (unique to scrollable) === */
     /* Instead of a table, use a flowing conversation-like layout */
@@ -136,7 +136,6 @@
       margin: 0 auto;
       padding: 40px 24px 80px;
       position: relative;
-      background: #fffaf5;
     }
 
     /* Center thread line */
@@ -147,7 +146,7 @@
       bottom: 0;
       left: 50%;
       width: 2px;
-      background: linear-gradient(180deg, rgba(255,200,150,0.2), rgba(255,180,130,0.3), rgba(255,200,150,0.2));
+      background: linear-gradient(180deg, rgba(255,200,150,0.1), rgba(255,180,130,0.15), rgba(255,200,150,0.1));
       transform: translateX(-50%);
       border-radius: 1px;
     }
@@ -169,8 +168,8 @@
 
     .topic-marker .tm-inner {
       display: inline-block;
-      background: #fff;
-      border: 1.5px solid rgba(80,40,40,0.08);
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(80,40,40,0.06);
       border-radius: 30px;
       padding: 8px 20px;
       font-size: 0.72rem;
@@ -227,16 +226,16 @@
     }
 
     .speech-a {
-      background: rgba(255,220,200,0.25);
-      border: 1px solid rgba(255,180,150,0.2);
+      background: rgba(255,220,200,0.45);
+      border: 1px solid rgba(255,180,150,0.25);
       border-radius: 18px 18px 4px 18px;
       text-align: right;
       transform: translateX(-20px);
     }
 
     .speech-b {
-      background: rgba(200,240,235,0.25);
-      border: 1px solid rgba(150,220,210,0.2);
+      background: rgba(200,240,235,0.45);
+      border: 1px solid rgba(150,220,210,0.25);
       border-radius: 18px 18px 18px 4px;
       text-align: left;
       transform: translateX(20px);
@@ -277,7 +276,7 @@
     /* === DECISION SECTION === */
     .decision-area {
       padding: 60px 24px 100px;
-      background: linear-gradient(180deg, #fffaf5 0%, #f8f0ff 20%, #f5eaff 50%, #fff5e6 80%, #fffaf5 100%);
+      background: transparent;
       text-align: center;
       position: relative;
     }
@@ -340,7 +339,7 @@
     }
 
     .path-card:nth-child(1)::before { background: linear-gradient(90deg, #ffb347, #ffd180); }
-    .path-card:nth-child(2)::before { background: linear-gradient(90deg, #b19cd9, #dab6fc); }
+    .path-card:nth-child(2)::before { background: linear-gradient(90deg, #74b9ff, #a8d8ff); }
     .path-card:nth-child(3)::before { background: linear-gradient(90deg, #7fdbca, #a8e6cf); }
 
     .path-card:hover {
@@ -352,18 +351,19 @@
     .path-card:hover::before { opacity: 1; }
 
     .path-card:nth-child(1):hover { border-color: rgba(255,179,71,0.35); }
-    .path-card:nth-child(2):hover { border-color: rgba(177,156,217,0.35); }
+    .path-card:nth-child(2):hover { border-color: rgba(116,185,255,0.35); }
     .path-card:nth-child(3):hover { border-color: rgba(127,219,202,0.35); }
 
     .path-card.selected {
-      border-color: rgba(177,156,217,0.5) !important;
-      box-shadow: 0 8px 28px rgba(177,156,217,0.12);
+      border-color: rgba(255,179,71,0.5) !important;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.06);
       transform: translateY(-6px) scale(1.02);
     }
 
     .path-card.selected::before { opacity: 1; }
 
-    .path-card .pc-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .path-card .pc-icon { margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .path-card .pc-icon img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
     .path-card h3 { font-size: 0.95rem; font-weight: 700; color: #3d2020; margin-bottom: 6px; }
     .path-card p { font-size: 0.78rem; color: rgba(80,40,40,0.5); line-height: 1.4; }
 
@@ -531,7 +531,7 @@
 
     .bg-sticker {
       position: absolute;
-      opacity: 0.5;
+      opacity: 0.6;
       border-radius: 10px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -745,28 +745,28 @@
         <!-- Left branch -->
         <path d="M350 35 C350 60, 117 70, 117 115" stroke="rgba(255,107,107,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
         <!-- Center branch -->
-        <path d="M350 35 L350 115" stroke="rgba(165,94,234,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+        <path d="M350 35 L350 115" stroke="rgba(116,185,255,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
         <!-- Right branch -->
         <path d="M350 35 C350 60, 583 70, 583 115" stroke="rgba(78,205,196,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
         <!-- End dots -->
         <circle cx="117" cy="115" r="4" fill="rgba(255,107,107,0.4)"/>
-        <circle cx="350" cy="115" r="4" fill="rgba(165,94,234,0.4)"/>
+        <circle cx="350" cy="115" r="4" fill="rgba(116,185,255,0.4)"/>
         <circle cx="583" cy="115" r="4" fill="rgba(78,205,196,0.4)"/>
       </svg>
 
       <div class="path-cards">
         <div class="path-card" onclick="selectOutcome('a', this)">
-          <span class="pc-icon">🔥</span>
+          <span class="pc-icon"><img src="people/A.webp" alt="Alex"></span>
           <h3>Alex's Way</h3>
           <p>They move. The desire for change takes priority.</p>
         </div>
         <div class="path-card" onclick="selectOutcome('compromise', this)">
-          <span class="pc-icon">🤝</span>
+          <span class="pc-icon"><img src="people/A.webp" alt="Alex"><img src="people/B.webp" alt="Jordan"></span>
           <h3>Compromise</h3>
           <p>A trial run — neither fully wins or loses.</p>
         </div>
         <div class="path-card" onclick="selectOutcome('b', this)">
-          <span class="pc-icon">🌿</span>
+          <span class="pc-icon"><img src="people/B.webp" alt="Jordan"></span>
           <h3>Jordan's Way</h3>
           <p>They stay. Stability takes priority.</p>
         </div>

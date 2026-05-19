@@ -309,7 +309,8 @@
     .fork-card:nth-child(2):hover { border-color: #a55eea; }
     .fork-card:nth-child(3):hover { border-color: #4ecdc4; }
 
-    .fork-card .fc-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .fork-card .fc-icon { margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .fork-card .fc-icon img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
     .fork-card h3 { font-size: 1rem; font-weight: 700; color: #3d2020; margin-bottom: 6px; }
     .fork-card p { font-size: 0.8rem; color: rgba(80,50,50,0.6); line-height: 1.4; }
 
@@ -397,7 +398,7 @@
 
     .bg-sticker {
       position: absolute;
-      opacity: 0.5;
+      opacity: 0.6;
       border-radius: 10px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -599,17 +600,17 @@
             </svg>
             <div class="fork-cards">
               <div class="fork-card fc-a" onclick="choose('a')">
-                <span class="fc-icon">🔥</span>
+                <span class="fc-icon"><img src="people/A.webp" alt="Alex"></span>
                 <h3>${personA.name}'s Way</h3>
                 <p>They move. The desire for change wins.</p>
               </div>
               <div class="fork-card fc-compromise" onclick="choose('compromise')">
-                <span class="fc-icon">🤝</span>
+                <span class="fc-icon"><img src="people/A.webp" alt="Alex"><img src="people/B.webp" alt="Jordan"></span>
                 <h3>Compromise</h3>
                 <p>A trial run. Neither fully wins or loses.</p>
               </div>
               <div class="fork-card fc-b" onclick="choose('b')">
-                <span class="fc-icon">🌿</span>
+                <span class="fc-icon"><img src="people/B.webp" alt="Jordan"></span>
                 <h3>${personB.name}'s Way</h3>
                 <p>They stay. Stability takes priority.</p>
               </div>
