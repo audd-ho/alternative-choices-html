@@ -8,7 +8,7 @@
   },
   "person_b": {
     "name": "B",
-    "tagline": "Wants to maintain this connection [idk, nothing is impossible, never give up -> too stubborn though]",
+    "tagline": "Wants to maintain this connection\n[idk, nothing is impossible, never give up -> too stubborn though]",
     "avatar": "people/B.webp"
   },
   "phases": [
@@ -60,13 +60,13 @@
           "B": "I overstepped her boundaries, especially so with the Ipad incident. I also feel annoying to text so much when she doesnt want to reply and ghosts, like i should shut up alr."
         },
         "Reaction to Problem/Opinion of the Other": {
-          "status": "aligned",
+          "status": "different",
           "A": "He is not listening, I already said that I don't want to maintain this connection and he keeps trying to fix it. He is being pushy and just wants it his way.",
           "B": "I hear her, she thinks I am being too pushy and I overstepped boundaries. She feels drained talking to me and I don't bring her joy. She finds the relationship meaningless and does not want to maintain the connection. I understand the concerns she raised and I know these issues can be resolved and the relationship can be improved if I work on myself and we both put in the effort to make it work. However, I also understand that she has better things to do and does not want to waste time on this relationship."
         },
         "Personal Thoughts": {
           "status": "different",
-          "A": "Bro annoying af, he just wants it his way and doesn't listen to me. I don't want to maintain this connection and I don't see any point in it. I have better things to do and I want this to end.",
+          "A": "Bro annoying af, he just wants it his way and doesn't listen to me, I already idgaf. I don't want to maintain this connection and I don't see any point in it. I have better things to do and I want this to end.",
           "B": "I am being pushy in trying to fix and maintain the connection when she does not want to engage, and not giving her space when she wants it. I just don't want to give up and I believe it can work out. But what value is there in it for her? Why should she want to maintain this connection? If it meant sacrificing time on things she can find joy in, to take this risk in this relationship, why would she want to do that? Even if it can improve, why would she wait around for it or give it a chance when she can just do something else that brings her joy?"
         },
         "Why It Matters": {
@@ -77,30 +77,28 @@
         "How to Resolve": {
           "status": "different",
           "A": "Put a full stop to this connection and end it after this conversation. I don't want to maintain this connection and I don't see any point in it. I have better things to do and I want this to end.",
-          "B": "I am open to trying a trial period or test run to see if we can improve the relationship and make it work. I think it could be a good way to give this a real shot and see if it brings us joy and benefits without fully giving up or accepting it right away. It would also give us both a chance to see if we can resolve the issues and make the relationship better before making a final decision on whether to maintain it or not."
+          "B": "I am open to trying a trial period or test run to see if we can improve the relationship and make it work, this feels like a compromise to me but maybe not to her and she won't want it. I think it could be a good way to give this a real shot and see if it brings us joy and benefits without fully giving up or accepting it right away. It would also give us both a chance to see if we can resolve the issues and make the relationship better before making a final decision on whether to maintain it or not."
         }
       }
     }
   ],
   "outcomes": {
     "a": {
-      "title": "It ends — A's Path",
+      "title": "It ends now — Germaine's Path",
       "A": {
         "tag": "positive",
         "tag_label": "Energised",
         "points": {
-          "Feeling": "Alive. Validated. The world opened up and proved the leap was worth it.",
-          "Gained": "New perspective, new network, renewed sense of possibility. The relationship feels dynamic again.",
-          "Growing Edge": "If it doesn't work, the pressure to justify the sacrifice. The 'I told you so' that lingers unspoken."
+          "Feeling": "Good, only joy and happy things remain now.",
+          "Gained": "I truly have better things to do and people to spend time with. The freedom to focus on what brings me joy."
         }
       },
       "B": {
         "tag": "neutral",
-        "tag_label": "Adapting",
+        "tag_label": "Disappointed",
         "points": {
-          "Feeling": "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity.",
-          "Gained": "Proof of flexibility. Deeper understanding of what 'home' actually means to them.",
-          "Growing Edge": "Resentment if things go badly. A lingering feeling of not being heard."
+          "Feeling": "Lost a connection that had potential. The 'what if' lingers. Some regrets that I didn't do better at the start and did not mention some things that I should have (maybe can't ever say).",
+          "Gained": "Honestly, I knew I was a stubborn person and was trying to change already, did not think it was still so bad. Although I want to say that she did not give me a chance to change and improve, but I should have been more aware too. As for the boundaries one, at times it was meant to be for fun and I did not realize it was crossing boundaries. Others, I was not sure about something I guess i never clarified it and I should have, at least now that I think back on it."
         }
       }
     },
@@ -108,41 +106,41 @@
       "title": "A fresh start — B's Path",
       "A": {
         "tag": "neutral",
-        "tag_label": "Restless",
+        "tag_label": "Skeptical",
         "points": {
-          "Feeling": "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground.",
-          "Gained": "Security. Time to figure out if the urge to leave was about geography or something internal.",
-          "Growing Edge": "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left."
+          "Feeling": "??? hopefully happy and she enjoys this ??? [ Honestly, I can't promise you'll be happier giving this chance, but I know that if you don't give it a chance, we will never know and idk man, I can only promise things within my control and I can promise that I will change, not try but I will, but if you are idgaf then no matter what i say, its useless since you made up your mind and am already looking at this from a fixed conclusion. Regardless, I want to point out that you really should not enter things with a conclusion in mind, future or whatever, but what do I know, maybe my thinking in this aspect is also flawed ]",
+          "Gained": "??? new perspective to not be so predisposed and give up before looking at things with a fresh mindset and give things a chance ???",
+          "Growing Edge": "If he does not change, it's just a matter of time before the same issues resurface. The fear of wasting time that will never comoe back."
         }
       },
       "B": {
         "tag": "positive",
-        "tag_label": "Grounded",
+        "tag_label": "Motivated",
         "points": {
-          "Feeling": "Relieved. Like the foundation held. Space to build upward without losing everything.",
-          "Gained": "Deeper roots, stronger community, the satisfaction of choosing depth over novelty.",
-          "Growing Edge": "Guilt about 'winning.' Anxiety the other person resents the choice."
+          "Feeling": "Happy that we managed to find a solution and mend this. I won't disappoint her.",
+          "Gained": "Ascertained my own flaws and the issues in the relationship. A clear path to improvement and a chance to make it work. Less issues and burdens on my mind and a trusted friend to talk to and share things with.",
+          "Growing Edge": "If I make the same mistakes, it could be worse than before because now there is more at stake. The pressure to change and improve, and the fear of failure. More important to not mess up again, but also more motivation to do better and make it work."
         }
       }
     },
     "compromise": {
       "title": "Trial Run — The Compromise",
       "A": {
-        "tag": "positive",
-        "tag_label": "Hopeful",
+        "tag": "neutral",
+        "tag_label": "YOLO",
         "points": {
-          "Feeling": "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now.",
-          "Gained": "A concrete plan instead of a daydream. The feeling of moving forward together.",
-          "Growing Edge": "If the trial succeeds, the permanence question returns. If it fails — was it a real try?"
+          "Feeling": "??? okay just try, yolo ??? [idk, just yolo can give it a chance] ",
+          "Gained": "??? Gamble? a chance? a risk that could pay off or not ??? [idk, a chance to see if it can work, but also a risk that it might not work and we end up in the same place or worse, but I can say from my end that I want to make it work]",
+          "Growing Edge": "If the trial succeeds, then both parties are happy andhave a chance to grow. If it fails — was it worth it? No longer want to even try in the future. The fear of wasting time and effort on something that ultimately does not work out."
         }
       },
       "B": {
         "tag": "positive",
-        "tag_label": "Respected",
+        "tag_label": "Relieved",
         "points": {
-          "Feeling": "Safe. A trial has an exit ramp — it's not a one-way door. This feels fair.",
-          "Gained": "Time. Data. A chance to experience the new without burning the old.",
-          "Growing Edge": "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities."
+          "Feeling": "Glad that she is willing to give it a chance and try to work on it together. I am relieved that we can at least try to make it work and see if it brings us joy and benefits.",
+          "Gained": "Clear on my issues to work on. A chance to grow and improve the relationship and make it work. Less regrets.",
+          "Growing Edge": "What if it doesn't work out? There is definitely that possibility no matter how much one tries but I would like to think that at least I tried."
         }
       }
     }
