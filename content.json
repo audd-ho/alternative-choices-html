@@ -2,12 +2,12 @@
   "title": "Two Sides, One Story",
   "description": "Understanding starts with seeing both perspectives. Try to find their way forward (or not...) together.",
   "person_a": {
-    "name": "Germaine",
+    "name": "GHSY",
     "tagline": "Wants to end this connection",
     "avatar": "people/A.webp"
   },
   "person_b": {
-    "name": "B",
+    "name": "AHQR",
     "tagline": "Wants to maintain this connection\n[idk, nothing is impossible, never give up -> too stubborn though]",
     "avatar": "people/B.webp"
   },
@@ -20,7 +20,7 @@
         "Current Opinion": {
           "status": "different",
           "A": "B wants his way too often. He is too pushy and keeps overstepping boundaries. I feel like this connection does not bring my joy and is draining me. I don't want to maintain this connection and I see no point in continuing.",
-          "B": "I want to mend this relationship because I care about this connection. I have reflected on my actions and know I can change in the way needed because I value our relationship. I am willing to listen and make changes if necessary as well, but I hope that Germaine can also see the value in what we have together. I understand that Germaine has concerns, but I also feel that there is potential for growth and improvement in our relationship."
+          "B": "I want to mend this relationship because I care about this connection. I have reflected on my actions and know I can change in the way needed because I value our relationship. I am willing to listen and make changes if necessary as well, but I hope that she can also see the value in what we have together. I understand that she has concerns, but I also feel that there is potential for growth and improvement in our relationship."
         },
         "What They Want": {
           "status": "different",
@@ -89,7 +89,7 @@
   ],
   "outcomes": {
     "a": {
-      "title": "It ends now — Germaine's Path",
+      "title": "It ends now — GHSY's Path",
       "A": {
         "tag": "positive",
         "tag_label": "Energised",
@@ -108,7 +108,7 @@
       }
     },
     "b": {
-      "title": "A fresh start — B's Path",
+      "title": "A fresh start — AHQR's Path",
       "A": {
         "tag": "neutral",
         "tag_label": "Skeptical",
