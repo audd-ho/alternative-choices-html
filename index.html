@@ -1,9 +1,9 @@
-git<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose Your Path</title>
+  <title>Two Sides</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -20,8 +20,9 @@ git<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       transition: background 0.6s ease;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
     /* Floating decorative shapes */
@@ -39,7 +40,7 @@ git<!DOCTYPE html>
     .shape {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.15;
+      opacity: 0.12;
       animation: float 6s ease-in-out infinite;
     }
 
@@ -93,8 +94,8 @@ git<!DOCTYPE html>
       transform: scale(0.95);
     }
 
-    /* Breadcrumb */
-    .breadcrumb {
+    /* Topic indicator */
+    .topic-indicator {
       position: fixed;
       top: 24px;
       right: 24px;
@@ -106,22 +107,28 @@ git<!DOCTYPE html>
       color: rgba(255,255,255,0.9);
       font-size: 0.85rem;
       font-weight: 400;
-      max-width: 50vw;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
-    /* Main card */
-    .card {
+    /* Container for all views */
+    #container {
       position: relative;
       z-index: 10;
+      width: 90vw;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+    }
+
+    /* Standard single card */
+    .card {
       background: rgba(255,255,255,0.95);
       border-radius: 32px;
       padding: 48px;
       max-width: 560px;
-      width: 90vw;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
       text-align: center;
       animation: cardIn 0.5s ease forwards;
     }
@@ -130,14 +137,97 @@ git<!DOCTYPE html>
       animation: cardOut 0.3s ease forwards;
     }
 
+    /* Split view container */
+    .split-view {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+      animation: cardIn 0.5s ease forwards;
+    }
+
+    .split-view.exit {
+      animation: cardOut 0.3s ease forwards;
+    }
+
+    .split-card {
+      flex: 1;
+      background: rgba(255,255,255,0.95);
+      border-radius: 28px;
+      padding: 36px 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .split-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+    }
+
+    .split-card.luna::before {
+      background: linear-gradient(90deg, #ff6b6b, #feca57);
+    }
+
+    .split-card.atlas::before {
+      background: linear-gradient(90deg, #4ecdc4, #44bd9e);
+    }
+
+    .split-card .person-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .split-card.luna .person-label { color: #ff6b6b; }
+    .split-card.atlas .person-label { color: #4ecdc4; }
+
+    .split-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      margin-bottom: 12px;
+    }
+
+    .split-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .split-card .emoji {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* VS divider in split */
+    .vs-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      flex-shrink: 0;
+    }
+
     @keyframes cardIn {
-      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     @keyframes cardOut {
       from { opacity: 1; transform: scale(1) translateY(0); }
-      to { opacity: 0; transform: scale(0.9) translateY(-20px); }
+      to { opacity: 0; transform: scale(0.92) translateY(-20px); }
     }
 
     .card h1 {
@@ -153,11 +243,39 @@ git<!DOCTYPE html>
       display: block;
     }
 
+    .card .subtitle {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
     .card p {
       font-size: 1.1rem;
       color: #555;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       line-height: 1.6;
+    }
+
+    .card .person-tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .card .person-tag.luna {
+      background: rgba(255, 107, 107, 0.12);
+      color: #ff6b6b;
+    }
+
+    .card .person-tag.atlas {
+      background: rgba(78, 205, 196, 0.12);
+      color: #4ecdc4;
     }
 
     /* Choice buttons */
@@ -168,17 +286,25 @@ git<!DOCTYPE html>
     }
 
     .choice-btn {
-      background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
       border: none;
       color: #fff;
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      padding: 16px 32px;
+      padding: 16px 28px;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .choice-btn .choice-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
     }
 
     .choice-btn:hover {
@@ -190,38 +316,89 @@ git<!DOCTYPE html>
       transform: translateY(0) scale(0.98);
     }
 
-    .choice-btn:nth-child(1) { --btn-start: #ff6b6b; --btn-end: #ee5a24; }
-    .choice-btn:nth-child(2) { --btn-start: #4ecdc4; --btn-end: #44bd9e; }
-    .choice-btn:nth-child(3) { --btn-start: #a55eea; --btn-end: #8854d0; }
-    .choice-btn:nth-child(4) { --btn-start: #fd9644; --btn-end: #e67e22; }
+    .choice-btn.luna-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    }
 
-    /* Start over button */
-    .restart-btn {
+    .choice-btn.atlas-btn {
+      background: linear-gradient(135deg, #4ecdc4, #44bd9e);
+    }
+
+    .choice-btn.both-btn {
+      background: linear-gradient(135deg, #a55eea, #8854d0);
+    }
+
+    /* Next topic button */
+    .next-btn {
       background: linear-gradient(135deg, #667eea, #764ba2);
       border: none;
       color: #fff;
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
-      padding: 16px 40px;
+      padding: 14px 36px;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-      margin-top: 8px;
+      margin-top: 24px;
     }
 
-    .restart-btn:hover {
+    .next-btn:hover {
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
     }
 
-    .restart-btn:active {
+    .next-btn:active {
       transform: translateY(0) scale(0.98);
     }
 
+    /* Person intro cards */
+    .intro-people {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .intro-person {
+      flex: 1;
+      padding: 16px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .intro-person.luna-intro {
+      background: rgba(255, 107, 107, 0.08);
+      border: 2px solid rgba(255, 107, 107, 0.2);
+    }
+
+    .intro-person.atlas-intro {
+      background: rgba(78, 205, 196, 0.08);
+      border: 2px solid rgba(78, 205, 196, 0.2);
+    }
+
+    .intro-person .intro-emoji {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .intro-person .intro-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .intro-person.luna-intro .intro-name { color: #ff6b6b; }
+    .intro-person.atlas-intro .intro-name { color: #4ecdc4; }
+
+    .intro-person .intro-desc {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
     /* Mobile responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .card {
         padding: 32px 24px;
         border-radius: 24px;
@@ -231,13 +408,36 @@ git<!DOCTYPE html>
         font-size: 1.6rem;
       }
 
-      .breadcrumb {
-        display: none;
+      .split-view {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .vs-divider {
+        transform: rotate(90deg);
+      }
+
+      .split-card {
+        padding: 28px 20px;
+      }
+
+      .intro-people {
+        flex-direction: column;
+        gap: 12px;
       }
 
       .choice-btn {
-        padding: 14px 24px;
-        font-size: 1rem;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+      }
+
+      .topic-indicator {
+        display: none;
+      }
+
+      #container {
+        min-height: auto;
+        padding: 80px 0 40px;
       }
     }
   </style>
@@ -253,181 +453,370 @@ git<!DOCTYPE html>
     <div class="shape"></div>
   </div>
 
-  <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
-  <div class="breadcrumb" id="breadcrumb"></div>
+  <button class="back-btn" id="backBtn" onclick="goBack()">← Back</button>
+  <div class="topic-indicator" id="topicIndicator"></div>
 
-  <div class="card" id="card"></div>
+  <div id="container"></div>
 
   <script>
-    // === SLIDE DATA ===
-    const slides = {
-      start: {
-        emoji: "🌟",
-        title: "Choose Your Adventure!",
-        body: "Welcome, explorer! Where would you like to go?",
-        bg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        choices: [
-          { label: "Enter the Enchanted Forest", target: "forest" },
-          { label: "Explore the Neon City", target: "city" },
-          { label: "Blast Off to Space", target: "space" }
-        ]
-      },
-
-      // === FOREST BRANCH ===
-      forest: {
-        emoji: "🌲",
-        title: "The Enchanted Forest",
-        body: "Tall trees tower above you. Fireflies dance between the branches. You hear a stream nearby and notice smoke rising from a distant chimney.",
-        bg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
-        choices: [
-          { label: "Follow the smoke to the cabin", target: "cabin" },
-          { label: "Wade into the glowing river", target: "river" }
-        ]
-      },
-      cabin: {
-        emoji: "🏠",
-        title: "The Cozy Cabin",
-        body: "A friendly wizard welcomes you inside! The cabin is filled with bubbling potions and floating books. He offers you a warm cup of starlight tea and shares tales of the forest's ancient magic.",
-        bg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-        choices: []
-      },
-      river: {
-        emoji: "🌊",
-        title: "The Crystal River",
-        body: "The water glows a soft turquoise. Fish made of pure light swim around your feet. You follow the river to a hidden waterfall that reveals a secret grotto full of luminescent crystals.",
-        bg: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-        choices: []
-      },
-
-      // === CITY BRANCH ===
-      city: {
-        emoji: "🏙️",
-        title: "Neon City",
-        body: "Holographic billboards flash above you. Flying cars zoom between towers of glass. A jazzy beat drifts from a rooftop bar, while the aroma of fresh coffee pulls you toward a cozy cafe.",
-        bg: "linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)",
-        choices: [
-          { label: "Grab coffee at the retro cafe", target: "cafe" },
-          { label: "Head up to the rooftop party", target: "rooftop" }
-        ]
-      },
-      cafe: {
-        emoji: "☕",
-        title: "The Retro Cafe",
-        body: "Vinyl records line the walls. A robot barista serves you a perfectly crafted espresso that shifts colors as you drink it. You strike up a conversation with a time-traveler at the next table.",
-        bg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
-        choices: []
-      },
-      rooftop: {
-        emoji: "🎉",
-        title: "Rooftop Party!",
-        body: "The whole city sparkles below you. A DJ plays music that makes the stars dance. You meet artists, inventors, and dreamers from every corner of the galaxy. Best night ever!",
-        bg: "linear-gradient(135deg, #e44d26 0%, #f16529 50%, #fc6e51 100%)",
-        choices: []
-      },
-
-      // === SPACE BRANCH ===
-      space: {
-        emoji: "🚀",
-        title: "Outer Space",
-        body: "Your rocket shoots through the atmosphere! Stars streak past the windows. Two destinations appear on your navigation screen.",
-        bg: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
-        choices: [
-          { label: "Land on the Moon", target: "moon" },
-          { label: "Journey to Mars", target: "mars" }
-        ]
-      },
-      moon: {
-        emoji: "🌙",
-        title: "The Moon",
-        body: "You bounce across the lunar surface in low gravity! In a crater, you discover an ancient alien library filled with the history of the universe, written in shimmering stardust.",
-        bg: "linear-gradient(135deg, #2c3e50 0%, #bdc3c7 100%)",
-        choices: []
-      },
-      mars: {
-        emoji: "🔴",
-        title: "Mars Colony",
-        body: "A thriving colony greets you with open arms. Domed gardens grow impossible fruits, and the sunset paints the sky in shades of pink and purple you've never seen before.",
-        bg: "linear-gradient(135deg, #eb3349 0%, #f45c43 100%)",
-        choices: []
-      }
+    // === TWO PEOPLE ===
+    const people = {
+      luna: { name: "Luna", emoji: "🌙", color: "#ff6b6b", desc: "Feeling, dreaming, leaping" },
+      atlas: { name: "Atlas", emoji: "🗺️", color: "#4ecdc4", desc: "Thinking, mapping, building" }
     };
+
+    // === TOPICS ===
+    const topics = [
+      {
+        id: "uncertainty",
+        title: "Facing the Unknown",
+        question: "When the path ahead is unclear, how do you move forward?",
+        bg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        luna: {
+          emoji: "🦋",
+          title: "Trust the Feeling",
+          body: "Uncertainty is an invitation, not a threat. I don't need to see the whole staircase — I just need to feel the next step. The best things in my life came from following hunches I couldn't explain. The unknown is where magic hides."
+        },
+        atlas: {
+          emoji: "🧭",
+          title: "Map What You Can",
+          body: "I can't control everything, but I can prepare. I gather information, weigh probabilities, and build contingency plans. Uncertainty shrinks when you shine a light on it. Clarity comes from asking the right questions, not from waiting for signs."
+        },
+        compromise: {
+          title: "Feel and Prepare",
+          body: "Intuition tells you which direction matters. Logic helps you pack the right gear. You can honor a gut feeling AND think through the next three steps. The best explorers carry both a compass and a willingness to wander."
+        }
+      },
+      {
+        id: "decisions",
+        title: "Making Choices",
+        question: "A big decision sits in front of you. How do you choose?",
+        bg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        luna: {
+          emoji: "💫",
+          title: "Follow What Sparks",
+          body: "I close my eyes and ask: which option makes me feel alive? The body knows before the mind does. Pro/con lists can't capture the weight of joy, the pull of curiosity. I choose what lights me up, even if it doesn't look logical on paper."
+        },
+        atlas: {
+          emoji: "⚖️",
+          title: "Weigh the Evidence",
+          body: "I lay everything out. What are the real costs? The likely outcomes? I look for the option that works across the most scenarios. Feelings are data too — but they're one input among many. A good decision should still make sense tomorrow morning."
+        },
+        compromise: {
+          title: "Logic as Scaffold, Heart as Guide",
+          body: "Use logic to eliminate the clearly wrong paths. Then, among the remaining options, choose the one your heart reaches for. Structure creates safety; feeling creates meaning. You don't have to choose between being smart and being alive."
+        }
+      },
+      {
+        id: "failure",
+        title: "After a Setback",
+        question: "Something you tried didn't work. What happens now?",
+        bg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
+        luna: {
+          emoji: "🌱",
+          title: "Feel It, Then Grow",
+          body: "I let myself be disappointed — that's honest. But then I look for the hidden seed. Every failure is a redirection. Maybe this wasn't a dead end but a door to something I wasn't brave enough to want before. The story isn't over."
+        },
+        atlas: {
+          emoji: "🔬",
+          title: "Diagnose and Rebuild",
+          body: "I go back to the wreckage and ask: what specifically broke? Was it the plan, the timing, or the execution? Failure is just a data point. I extract the lesson, adjust the model, and try a better-informed attempt. No experiment is wasted."
+        },
+        compromise: {
+          title: "Mourn, Then Investigate",
+          body: "Give yourself a moment to feel the loss — that's respect for what you tried. Then, with kind curiosity, look at what happened. Not to blame, but to understand. Growth lives in the space between self-compassion and honest analysis."
+        }
+      },
+      {
+        id: "connection",
+        title: "How to Connect",
+        question: "You want to truly understand another person. How?",
+        bg: "linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)",
+        luna: {
+          emoji: "💗",
+          title: "Open and Feel With Them",
+          body: "I stop trying to figure people out and start feeling with them instead. Presence. Eye contact. Asking 'how does that feel?' rather than 'what happened?' People don't want to be solved — they want to be seen. I offer my whole attention."
+        },
+        atlas: {
+          emoji: "🔑",
+          title: "Listen and Learn Their World",
+          body: "I ask questions. I remember details. I build a mental model of who they are — their values, their fears, what makes them tick. Understanding someone means studying them with genuine respect. I pay attention to patterns and meet them where they are."
+        },
+        compromise: {
+          title: "Presence Meets Attention",
+          body: "Feel with them in the moment — that's the warmth. Remember and connect the dots later — that's the depth. The best listeners do both: they hold space without agenda, AND they remember what matters. Love is attention made visible."
+        }
+      },
+      {
+        id: "time",
+        title: "Spending Your Time",
+        question: "You have one free afternoon. No obligations. What matters?",
+        bg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
+        luna: {
+          emoji: "🎨",
+          title: "Follow the Moment",
+          body: "No plan. I wander. Maybe I end up painting, maybe I sit in a park watching clouds, maybe I call someone I miss. The point is to be fully here — not optimizing, not producing. Rest is sacred. Play is sacred. An unplanned afternoon is a gift."
+        },
+        atlas: {
+          emoji: "📐",
+          title: "Invest It Wisely",
+          body: "Free time is rare — I want to use it well. I pick one thing I've been meaning to do: learn something, build something, fix something that's been nagging me. At the end of the day, I want to feel like I moved forward. Progress is its own kind of rest."
+        },
+        compromise: {
+          title: "Structured Wandering",
+          body: "Set one intention — just one — and leave the rest open. 'I'll start with a walk' or 'I'll read for an hour.' Then let the afternoon breathe. You get the satisfaction of honoring a commitment without caging the whole day. Some of the best things happen in the margins."
+        }
+      }
+    ];
 
     // === STATE ===
     let history = [];
-    let currentSlide = "start";
+    let currentView = { type: "intro" }; // { type: "intro" | "question" | "perspective" | "split" | "end", topicIndex, person }
+    let topicIndex = 0;
 
-    // === RENDER ===
-    function renderSlide(id, direction = "forward") {
-      const slide = slides[id];
-      const card = document.getElementById("card");
-      const backBtn = document.getElementById("backBtn");
-      const breadcrumb = document.getElementById("breadcrumb");
+    // === RENDER FUNCTIONS ===
 
-      // Animate out
-      card.classList.add("exit");
-
-      setTimeout(() => {
-        // Update background
-        document.body.style.background = slide.bg;
-
-        // Build card content
-        let html = `<span class="emoji">${slide.emoji}</span>`;
-        html += `<h1>${slide.title}</h1>`;
-        html += `<p>${slide.body}</p>`;
-
-        if (slide.choices.length > 0) {
-          html += `<div class="choices">`;
-          slide.choices.forEach(choice => {
-            html += `<button class="choice-btn" onclick="navigate('${choice.target}')">${choice.label}</button>`;
-          });
-          html += `</div>`;
-        } else {
-          // End slide
-          html += `<button class="restart-btn" onclick="startOver()">Start Over</button>`;
-        }
-
-        card.innerHTML = html;
-        card.classList.remove("exit");
-
-        // Reset animation
-        card.style.animation = "none";
-        card.offsetHeight; // trigger reflow
-        card.style.animation = "";
-
-        // Back button visibility
-        if (history.length > 0) {
-          backBtn.classList.add("visible");
-        } else {
-          backBtn.classList.remove("visible");
-        }
-
-        // Breadcrumb
-        const trail = [...history, id].map(sid => slides[sid].title);
-        breadcrumb.textContent = trail.join("  ›  ");
-
-      }, direction === "forward" ? 300 : 250);
+    function animateOut(callback) {
+      const container = document.getElementById("container");
+      const content = container.firstElementChild;
+      if (content) {
+        content.classList.add("exit");
+        setTimeout(callback, 300);
+      } else {
+        callback();
+      }
     }
 
-    function navigate(target) {
-      history.push(currentSlide);
-      currentSlide = target;
-      renderSlide(target, "forward");
+    function updateBackBtn() {
+      const backBtn = document.getElementById("backBtn");
+      if (history.length > 0) {
+        backBtn.classList.add("visible");
+      } else {
+        backBtn.classList.remove("visible");
+      }
+    }
+
+    function updateIndicator() {
+      const indicator = document.getElementById("topicIndicator");
+      if (currentView.type === "intro" || currentView.type === "end") {
+        indicator.textContent = "";
+      } else {
+        indicator.textContent = `${topicIndex + 1} / ${topics.length}`;
+      }
+    }
+
+    function renderIntro() {
+      animateOut(() => {
+        const container = document.getElementById("container");
+        document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+
+        container.innerHTML = `
+          <div class="card">
+            <span class="emoji">⚡</span>
+            <h1>Two Sides</h1>
+            <p>Every question has more than one honest answer. Meet two minds — two ways of moving through the world — and decide whose lens you want to look through.</p>
+            <div class="intro-people">
+              <div class="intro-person luna-intro">
+                <span class="intro-emoji">${people.luna.emoji}</span>
+                <div class="intro-name">${people.luna.name}</div>
+                <div class="intro-desc">${people.luna.desc}</div>
+              </div>
+              <div class="intro-person atlas-intro">
+                <span class="intro-emoji">${people.atlas.emoji}</span>
+                <div class="intro-name">${people.atlas.name}</div>
+                <div class="intro-desc">${people.atlas.desc}</div>
+              </div>
+            </div>
+            <button class="next-btn" onclick="startTopics()">Begin</button>
+          </div>
+        `;
+        updateBackBtn();
+        updateIndicator();
+      });
+    }
+
+    function renderQuestion() {
+      const topic = topics[topicIndex];
+      animateOut(() => {
+        const container = document.getElementById("container");
+        document.body.style.background = topic.bg;
+
+        container.innerHTML = `
+          <div class="card">
+            <span class="subtitle">${topic.title}</span>
+            <h1>${topic.question}</h1>
+            <p style="margin-bottom: 24px; opacity: 0.7; font-size: 0.95rem;">Choose a perspective to explore:</p>
+            <div class="choices">
+              <button class="choice-btn luna-btn" onclick="showPerspective('luna')">
+                <span class="choice-icon">${people.luna.emoji}</span>
+                ${people.luna.name}'s way
+              </button>
+              <button class="choice-btn atlas-btn" onclick="showPerspective('atlas')">
+                <span class="choice-icon">${people.atlas.emoji}</span>
+                ${people.atlas.name}'s way
+              </button>
+              <button class="choice-btn both-btn" onclick="showBoth()">
+                <span class="choice-icon">🤝</span>
+                See both sides
+              </button>
+            </div>
+          </div>
+        `;
+        updateBackBtn();
+        updateIndicator();
+      });
+    }
+
+    function renderPerspective(person) {
+      const topic = topics[topicIndex];
+      const data = topic[person];
+      const personInfo = people[person];
+
+      animateOut(() => {
+        const container = document.getElementById("container");
+
+        container.innerHTML = `
+          <div class="card">
+            <span class="person-tag ${person}">${personInfo.emoji} ${personInfo.name}</span>
+            <span class="emoji">${data.emoji}</span>
+            <h1>${data.title}</h1>
+            <p>${data.body}</p>
+            <button class="next-btn" onclick="nextTopic()">
+              ${topicIndex < topics.length - 1 ? 'Next Topic →' : 'Finish →'}
+            </button>
+          </div>
+        `;
+        updateBackBtn();
+        updateIndicator();
+      });
+    }
+
+    function renderSplit() {
+      const topic = topics[topicIndex];
+
+      animateOut(() => {
+        const container = document.getElementById("container");
+
+        container.innerHTML = `
+          <div class="split-view">
+            <div class="split-card luna">
+              <span class="person-label">${people.luna.emoji} ${people.luna.name}</span>
+              <span class="emoji">${topic.luna.emoji}</span>
+              <h2>${topic.luna.title}</h2>
+              <p>${topic.luna.body}</p>
+            </div>
+            <div class="vs-divider">✦</div>
+            <div class="split-card atlas">
+              <span class="person-label">${people.atlas.emoji} ${people.atlas.name}</span>
+              <span class="emoji">${topic.atlas.emoji}</span>
+              <h2>${topic.atlas.title}</h2>
+              <p>${topic.atlas.body}</p>
+            </div>
+          </div>
+        `;
+
+        // Add compromise + next button below the split after a beat
+        setTimeout(() => {
+          const splitView = container.querySelector('.split-view');
+          const bottomSection = document.createElement('div');
+          bottomSection.style.cssText = 'text-align:center; margin-top: 20px; animation: cardIn 0.4s ease forwards; width: 100%;';
+          bottomSection.innerHTML = `
+            <div style="background: rgba(255,255,255,0.9); border-radius: 20px; padding: 24px 32px; max-width: 560px; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+              <div style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #a55eea; margin-bottom: 10px;">🤝 The Compromise</div>
+              <h2 style="font-size: 1.2rem; color: #2d2d2d; margin-bottom: 8px;">${topic.compromise.title}</h2>
+              <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 16px;">${topic.compromise.body}</p>
+              <button class="next-btn" onclick="nextTopic()">
+                ${topicIndex < topics.length - 1 ? 'Next Topic →' : 'Finish →'}
+              </button>
+            </div>
+          `;
+          container.appendChild(bottomSection);
+        }, 400);
+
+        updateBackBtn();
+        updateIndicator();
+      });
+    }
+
+    function renderEnd() {
+      animateOut(() => {
+        const container = document.getElementById("container");
+        document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+
+        container.innerHTML = `
+          <div class="card">
+            <span class="emoji">✨</span>
+            <h1>Two sides, one whole.</h1>
+            <p>Every perspective holds a piece of the truth. The art is knowing when to feel, when to think — and when to do both at once.</p>
+            <button class="next-btn" onclick="startOver()">Start Over</button>
+          </div>
+        `;
+        updateBackBtn();
+        updateIndicator();
+      });
+    }
+
+    // === NAVIGATION ===
+
+    function pushState() {
+      history.push({ ...currentView, topicIndex });
+    }
+
+    function startTopics() {
+      pushState();
+      currentView = { type: "question" };
+      topicIndex = 0;
+      renderQuestion();
+    }
+
+    function showPerspective(person) {
+      pushState();
+      currentView = { type: "perspective", person };
+      renderPerspective(person);
+    }
+
+    function showBoth() {
+      pushState();
+      currentView = { type: "split" };
+      renderSplit();
+    }
+
+    function nextTopic() {
+      pushState();
+      topicIndex++;
+      if (topicIndex >= topics.length) {
+        currentView = { type: "end" };
+        renderEnd();
+      } else {
+        currentView = { type: "question" };
+        renderQuestion();
+      }
     }
 
     function goBack() {
       if (history.length === 0) return;
-      currentSlide = history.pop();
-      renderSlide(currentSlide, "back");
+      const prev = history.pop();
+      topicIndex = prev.topicIndex;
+      currentView = { type: prev.type, person: prev.person };
+
+      switch (currentView.type) {
+        case "intro": renderIntro(); break;
+        case "question": renderQuestion(); break;
+        case "perspective": renderPerspective(currentView.person); break;
+        case "split": renderSplit(); break;
+        case "end": renderEnd(); break;
+      }
     }
 
     function startOver() {
       history = [];
-      currentSlide = "start";
-      renderSlide("start", "forward");
+      topicIndex = 0;
+      currentView = { type: "intro" };
+      renderIntro();
     }
 
     // === INIT ===
-    renderSlide("start");
+    renderIntro();
   </script>
 </body>
 </html>
