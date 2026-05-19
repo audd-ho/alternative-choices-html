@@ -25,7 +25,7 @@
       justify-content: center;
       text-align: center;
       padding: 40px;
-      background: linear-gradient(180deg, #fff5e6 0%, #ffe8d6 20%, #ffd4c4 60%, #ffb8a8 100%);
+      background: linear-gradient(180deg, #fff5e6 0%, #ffe8d6 30%, #ffd4c4 60%, #ffe8d6 85%, #fffaf5 100%);
       position: relative;
     }
 
@@ -97,6 +97,7 @@
       padding: 100px 40px;
       text-align: center;
       position: relative;
+      z-index: 1;
     }
 
     .phase-banner .pb-num {
@@ -123,9 +124,10 @@
       line-height: 1.55;
     }
 
-    .pb-before { background: linear-gradient(180deg, #ffb8a8 0%, #fff0e0 100%); }
-    .pb-present { background: linear-gradient(180deg, #e8f8ff 0%, #d4f0ff 50%, #c8e8ff 100%); }
-    .pb-decide { background: linear-gradient(180deg, #f0e6ff 0%, #e8d8ff 50%, #f5eaff 100%); }
+    /* Gradients that fade into the page background at top and bottom — no hard edges */
+    .pb-before { background: linear-gradient(180deg, #fffaf5 0%, #ffe8d8 20%, #ffd8c4 50%, #ffe8d8 80%, #fffaf5 100%); }
+    .pb-present { background: linear-gradient(180deg, #fffaf5 0%, #e8f4ff 20%, #d8ecff 50%, #e8f4ff 80%, #fffaf5 100%); }
+    .pb-decide { background: linear-gradient(180deg, #fffaf5 0%, #f0e6ff 20%, #e8daff 50%, #f0e6ff 80%, #fffaf5 100%); }
 
     /* === SCROLL NARRATIVE (unique to scrollable) === */
     /* Instead of a table, use a flowing conversation-like layout */
@@ -275,7 +277,7 @@
     /* === DECISION SECTION === */
     .decision-area {
       padding: 60px 24px 100px;
-      background: linear-gradient(180deg, #f5eaff 0%, #fff5e6 30%, #fffaf5 100%);
+      background: linear-gradient(180deg, #fffaf5 0%, #f8f0ff 20%, #f5eaff 50%, #fff5e6 80%, #fffaf5 100%);
       text-align: center;
       position: relative;
     }
@@ -529,7 +531,7 @@
 
     .bg-sticker {
       position: absolute;
-      opacity: 0.4;
+      opacity: 0.5;
       border-radius: 10px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -554,7 +556,7 @@
     <div class="intro-faces">
       <div class="intro-face">
         <div class="avatar">
-          <img src="people/A.jpg" alt="Alex">
+          <img src="people/A.webp" alt="Alex">
         </div>
         <div class="if-name">Alex</div>
         <div class="if-sub">Wants change</div>
@@ -562,7 +564,7 @@
       <div class="vs-badge">VS</div>
       <div class="intro-face">
         <div class="avatar">
-          <img src="people/B.jpg" alt="Jordan">
+          <img src="people/B.webp" alt="Jordan">
         </div>
         <div class="if-name">Jordan</div>
         <div class="if-sub">Wants stability</div>
@@ -586,14 +588,14 @@
       <div class="speech-a">
         We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -605,14 +607,14 @@
       <div class="speech-a">
         A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here.
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -624,14 +626,14 @@
       <div class="speech-a">
         I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness.
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -643,14 +645,14 @@
       <div class="speech-a">
         Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         Double down here. Join new communities, explore parts of the city we've ignored. Bloom where we're planted.
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -671,14 +673,14 @@
       <div class="speech-a">
         I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive.
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -690,14 +692,14 @@
       <div class="speech-a">
         Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -709,14 +711,14 @@
       <div class="speech-a">
         Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before deciding it's not for us.
         <div class="mini-avatar">
-          <img src="people/A.jpg" alt="A">
+          <img src="people/A.webp" alt="A">
         </div>
       </div>
       <div class="speech-gap"></div>
       <div class="speech-b">
         Let's slow down and explore why we feel this way first. If we move, let it come from clarity — not from FOMO.
         <div class="mini-avatar">
-          <img src="people/B.jpg" alt="B">
+          <img src="people/B.webp" alt="B">
         </div>
       </div>
     </div>
@@ -825,8 +827,8 @@
       }
     };
 
-    const avatarA = `<img src="people/A.jpg" alt="Alex">`;
-    const avatarB = `<img src="people/B.jpg" alt="Jordan">`;
+    const avatarA = `<img src="people/A.webp" alt="Alex">`;
+    const avatarB = `<img src="people/B.webp" alt="Jordan">`;
 
     // === SCROLL REVEAL ===
     const observer = new IntersectionObserver((entries) => {
@@ -905,7 +907,7 @@
       const container = document.getElementById('bgStickers');
       const totalFiles = 120;
       const startNum = 450938;
-      const count = 60; // lots of stickers down the full page
+      const count = 80; // lots of stickers down the full page
 
       // Get full page height
       const pageHeight = Math.max(
@@ -935,13 +937,8 @@
         const yJitter = (Math.random() - 0.5) * 200;
         img.style.top = (yBase + yJitter) + 'px';
 
-        // Random horizontal — avoid the very center where content is
-        const side = Math.random() > 0.5;
-        if (side) {
-          img.style.left = (Math.random() * 15 + 2) + '%'; // left edge
-        } else {
-          img.style.right = (Math.random() * 15 + 2) + '%'; // right edge
-        }
+        // Scatter across the full width
+        img.style.left = (Math.random() * 90 + 3) + '%';
 
         img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
 
