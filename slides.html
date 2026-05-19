@@ -419,15 +419,21 @@
 <body>
 
   <div class="bg-stickers" id="bgStickers"></div>
-  <div id="app"></div>
+  <div id="app">
+    <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px;">
+      <p style="color:rgba(80,50,50,0.5); margin-bottom:16px; font-size:0.9rem;">Loading content...</p>
+      <div id="uploadFallback" style="display:none; cursor:pointer; padding:24px 40px; border:2px dashed rgba(80,50,50,0.2); border-radius:16px; color:rgba(80,50,50,0.5); font-size:0.85rem;">
+        Could not auto-load content.json<br><strong>Click here or drag & drop</strong> your content.json file
+        <input type="file" accept=".json" id="fileInput" style="display:none;">
+      </div>
+    </div>
+  </div>
 
   <script>
-    // === DATA ===
-    const personA = { name: "Alex", tagline: "Wants change" };
-    const personB = { name: "Jordan", tagline: "Wants stability" };
-
-    const avatarA = `<div class="col-avatar"><img src="people/A.webp" alt="Alex"></div>`;
-    const avatarB = `<div class="col-avatar"><img src="people/B.webp" alt="Jordan"></div>`;
+    // === LOAD DATA ===
+    let personA, personB, avatarA, avatarB, sections, outcomes;
+    let currentStep = 0;
+    let chosenOutcome = null;
 
     const backgrounds = [
       "linear-gradient(135deg, #fff5e6 0%, #ffe8d6 50%, #ffd4c4 100%)",
@@ -436,94 +442,94 @@
       "linear-gradient(135deg, #e6fff5 0%, #d4ffe8 50%, #c8f8e0 100%)"
     ];
 
-    const sections = [
-      {
-        phase: "Before",
-        title: "Where They Stand",
-        rows: [
-          { topic: "Current Opinion", status: "different",
-            a: "We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.",
-            b: "This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?" },
-          { topic: "What They Want", status: "different",
-            a: "A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.",
-            b: "Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here." },
-          { topic: "What They Expect", status: "close",
-            a: "I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.",
-            b: "I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness." },
-          { topic: "How to Get There", status: "different",
-            a: "Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.",
-            b: "Double down here. Join new communities, explore our own city, reinvest in relationships. Bloom where we're planted." }
-        ]
-      },
-      {
-        phase: "Present",
-        title: "What They're Saying",
-        rows: [
-          { topic: "Trying to Say", status: "close",
-            a: "I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.",
-            b: "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive." },
-          { topic: "Why It Matters", status: "aligned",
-            a: "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
-            b: "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'" },
-          { topic: "How to Resolve", status: "close",
-            a: "Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before we decide it's not for us.",
-            b: "Let's slow down and explore why we feel this way first. If we move, I want it to come from clarity — not FOMO." }
-        ]
+    // Auto-load: check sessionStorage first (set by index.html), then fetch, then fallback upload
+    (async function autoLoad() {
+      const cached = sessionStorage.getItem('content');
+      if (cached) {
+        try { initData(JSON.parse(cached)); return; } catch(e) {}
       }
-    ];
-
-    const outcomes = {
-      a: {
-        title: "They Move — Alex's Path",
-        bg: "linear-gradient(135deg, #fff0e6 0%, #ffe6f0 50%, #fff5e6 100%)",
-        a: { tag: "positive", tagLabel: "Energised", points: [
-          { topic: "Feeling", value: "Alive. Validated. The world opened up and proved the leap was worth it." },
-          { topic: "Gained", value: "New perspective, new network, renewed sense of possibility. The relationship feels dynamic again." },
-          { topic: "Growing Edge", value: "If it doesn't work, the pressure to justify the sacrifice. The 'I told you so' that lingers unspoken." }
-        ]},
-        b: { tag: "neutral", tagLabel: "Adapting", points: [
-          { topic: "Feeling", value: "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity." },
-          { topic: "Gained", value: "Proof of flexibility. Deeper understanding of what 'home' actually means to them." },
-          { topic: "Growing Edge", value: "Resentment if things go badly. A lingering feeling of not being heard." }
-        ]}
-      },
-      b: {
-        title: "They Stay — Jordan's Path",
-        bg: "linear-gradient(135deg, #e6fff5 0%, #e0f8ff 50%, #e6f5ff 100%)",
-        a: { tag: "neutral", tagLabel: "Restless", points: [
-          { topic: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground." },
-          { topic: "Gained", value: "Security. Time to figure out if the urge to leave was about geography or something internal." },
-          { topic: "Growing Edge", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
-        ]},
-        b: { tag: "positive", tagLabel: "Grounded", points: [
-          { topic: "Feeling", value: "Relieved. Like the foundation held. Space to build upward without losing everything." },
-          { topic: "Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
-          { topic: "Growing Edge", value: "Guilt about 'winning.' Anxiety the other person resents the choice." }
-        ]}
-      },
-      compromise: {
-        title: "Trial Run — The Compromise",
-        bg: "linear-gradient(135deg, #f5eaff 0%, #e8f0ff 50%, #eaf5ff 100%)",
-        a: { tag: "positive", tagLabel: "Hopeful", points: [
-          { topic: "Feeling", value: "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now." },
-          { topic: "Gained", value: "A concrete plan instead of a daydream. The feeling of moving forward together." },
-          { topic: "Growing Edge", value: "If the trial succeeds, the permanence question returns. If it fails — was it a real try?" }
-        ]},
-        b: { tag: "positive", tagLabel: "Respected", points: [
-          { topic: "Feeling", value: "Safe. A trial has an exit ramp — it's not a one-way door. This feels fair." },
-          { topic: "Gained", value: "Time. Data. A chance to experience the new without burning the old." },
-          { topic: "Growing Edge", value: "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities." }
-        ]}
+      try {
+        const res = await fetch('content.json');
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        initData(data);
+      } catch(e) {
+        document.getElementById('uploadFallback').style.display = 'block';
       }
-    };
+    })();
 
-    // === STATE ===
-    let currentStep = 0; // 0,1 = sections, 2 = choice, 3 = outcome
-    let chosenOutcome = null;
+    // Manual upload fallback
+    const uploadArea = document.getElementById('uploadFallback');
+    const fileInput = document.getElementById('fileInput');
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'rgba(80,50,50,0.5)'; });
+    uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = 'rgba(80,50,50,0.2)'; });
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file) readFile(file);
+    });
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) readFile(file);
+    });
+
+    function readFile(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const data = JSON.parse(e.target.result);
+          initData(data);
+        } catch(err) { alert('Invalid JSON file'); }
+      };
+      reader.readAsText(file);
+    }
+
+    function initData(data) {
+        personA = { name: data.person_a.name, tagline: data.person_a.tagline, avatar: data.person_a.avatar };
+        personB = { name: data.person_b.name, tagline: data.person_b.tagline, avatar: data.person_b.avatar };
+        avatarA = `<div class="col-avatar"><img src="${data.person_a.avatar}" alt="${data.person_a.name}"></div>`;
+        avatarB = `<div class="col-avatar"><img src="${data.person_b.avatar}" alt="${data.person_b.name}"></div>`;
+
+        // Convert phases to sections
+        sections = data.phases.map(phase => ({
+          phase: phase.name,
+          title: phase.title,
+          rows: Object.entries(phase.topics).map(([topic, val]) => ({
+            topic,
+            status: val.status,
+            a: val.A,
+            b: val.B
+          }))
+        }));
+
+        // Convert outcomes
+        outcomes = {};
+        Object.entries(data.outcomes).forEach(([key, val]) => {
+          outcomes[key] = {
+            title: val.title,
+            bg: key === 'a' ? backgrounds[0] : key === 'b' ? backgrounds[3] : backgrounds[2],
+            a: {
+              tag: val.A.tag,
+              tagLabel: val.A.tag_label,
+              points: Object.entries(val.A.points).map(([topic, value]) => ({ topic, value }))
+            },
+            b: {
+              tag: val.B.tag,
+              tagLabel: val.B.tag_label,
+              points: Object.entries(val.B.points).map(([topic, value]) => ({ topic, value }))
+            }
+          };
+        });
+
+        render();
+    }
 
     // === RENDER ===
     function render() {
       const app = document.getElementById('app');
+      const totalSteps = sections.length + 2;
       document.body.style.background = backgrounds[Math.min(currentStep, backgrounds.length - 1)];
 
       if (currentStep < sections.length) {
@@ -539,6 +545,7 @@
     }
 
     function renderTableView(section) {
+      const totalSteps = sections.length + 2;
       let rowsHtml = '';
       section.rows.forEach(row => {
         rowsHtml += `
@@ -560,7 +567,7 @@
           <div class="header">
             <div class="phase-label">${section.phase} — ${section.title}</div>
             <div class="progress-dots">
-              ${[0,1,2,3].map(i => `<div class="dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('')}
+              ${Array.from({length: totalSteps}, (_, i) => `<div class="dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('')}
             </div>
           </div>
           <div class="table-container">
@@ -580,12 +587,13 @@
     }
 
     function renderChoiceView() {
+      const totalSteps = sections.length + 2;
       return `
         <div class="choice-view">
           <div class="header" style="position:absolute; top:0; left:0; right:0;">
             <div class="phase-label">Decision</div>
             <div class="progress-dots">
-              ${[0,1,2,3].map(i => `<div class="dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('')}
+              ${Array.from({length: totalSteps}, (_, i) => `<div class="dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('')}
             </div>
           </div>
           <h2>Whose path is chosen?</h2>
@@ -593,26 +601,26 @@
           <div class="fork-container">
             <div class="fork-road"></div>
             <svg class="fork-branches" viewBox="0 0 750 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-2px; left:0; width:100%; height:60px; pointer-events:none;">
-              <path d="M375 0 C375 30, 125 30, 125 58" stroke="rgba(255,107,107,0.3)" stroke-width="3" stroke-linecap="round"/>
-              <path d="M375 0 C375 20, 375 40, 375 58" stroke="rgba(165,94,234,0.3)" stroke-width="3" stroke-linecap="round"/>
-              <path d="M375 0 C375 30, 625 30, 625 58" stroke="rgba(78,205,196,0.3)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M375 0 C375 30, 125 30, 125 58" stroke="rgba(255,179,120,0.3)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M375 0 C375 20, 375 40, 375 58" stroke="rgba(116,185,255,0.3)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M375 0 C375 30, 625 30, 625 58" stroke="rgba(127,219,202,0.3)" stroke-width="3" stroke-linecap="round"/>
               <circle cx="375" cy="0" r="5" fill="rgba(80,50,50,0.2)"/>
             </svg>
             <div class="fork-cards">
               <div class="fork-card fc-a" onclick="choose('a')">
-                <span class="fc-icon"><img src="people/A.webp" alt="Alex"></span>
+                <span class="fc-icon"><img src="${personA.avatar}" alt="${personA.name}"></span>
                 <h3>${personA.name}'s Way</h3>
-                <p>They move. The desire for change wins.</p>
+                <p>Their path takes priority.</p>
               </div>
               <div class="fork-card fc-compromise" onclick="choose('compromise')">
-                <span class="fc-icon"><img src="people/A.webp" alt="Alex"><img src="people/B.webp" alt="Jordan"></span>
+                <span class="fc-icon"><img src="${personA.avatar}" alt="${personA.name}"><img src="${personB.avatar}" alt="${personB.name}"></span>
                 <h3>Compromise</h3>
-                <p>A trial run. Neither fully wins or loses.</p>
+                <p>A middle ground for both.</p>
               </div>
               <div class="fork-card fc-b" onclick="choose('b')">
-                <span class="fc-icon"><img src="people/B.webp" alt="Jordan"></span>
+                <span class="fc-icon"><img src="${personB.avatar}" alt="${personB.name}"></span>
                 <h3>${personB.name}'s Way</h3>
-                <p>They stay. Stability takes priority.</p>
+                <p>Their path takes priority.</p>
               </div>
             </div>
           </div>
@@ -624,19 +632,23 @@
     }
 
     function renderOutcomeView() {
+      const totalSteps = sections.length + 2;
       const outcome = outcomes[chosenOutcome];
       let rowsHtml = '';
       const pointsA = outcome.a.points;
       const pointsB = outcome.b.points;
+      const maxLen = Math.max(pointsA.length, pointsB.length);
 
-      for (let i = 0; i < pointsA.length; i++) {
+      for (let i = 0; i < maxLen; i++) {
+        const pA = pointsA[i] || { topic: '', value: '' };
+        const pB = pointsB[i] || { topic: '', value: '' };
         rowsHtml += `
           <div class="table-row">
-            <div class="cell cell-a">${pointsA[i].value}</div>
+            <div class="cell cell-a">${pA.value}</div>
             <div class="row-topic">
-              <div class="row-topic-inner">${pointsA[i].topic}</div>
+              <div class="row-topic-inner">${pA.topic}</div>
             </div>
-            <div class="cell cell-b">${pointsB[i].value}</div>
+            <div class="cell cell-b">${pB.value}</div>
           </div>
         `;
       }
@@ -646,7 +658,7 @@
           <div class="header">
             <div class="phase-label">${outcome.title}</div>
             <div class="progress-dots">
-              ${[0,1,2,3].map(i => `<div class="dot ${i <= currentStep ? 'active' : ''}"></div>`).join('')}
+              ${Array.from({length: totalSteps}, (_, i) => `<div class="dot ${i <= currentStep ? 'active' : ''}"></div>`).join('')}
             </div>
           </div>
           <div class="table-container">
@@ -672,32 +684,14 @@
     }
 
     // === NAV ===
-    function next() {
-      currentStep++;
-      render();
-    }
-
+    function next() { currentStep++; render(); }
     function prev() {
-      if (currentStep > sections.length) {
-        chosenOutcome = null;
-        currentStep = sections.length;
-      } else if (currentStep > 0) {
-        currentStep--;
-      }
+      if (currentStep > sections.length) { chosenOutcome = null; currentStep = sections.length; }
+      else if (currentStep > 0) { currentStep--; }
       render();
     }
-
-    function choose(choice) {
-      chosenOutcome = choice;
-      currentStep = sections.length + 1;
-      render();
-    }
-
-    function startOver() {
-      currentStep = 0;
-      chosenOutcome = null;
-      render();
-    }
+    function choose(choice) { chosenOutcome = choice; currentStep = sections.length + 1; render(); }
+    function startOver() { currentStep = 0; chosenOutcome = null; render(); }
 
     // Keyboard
     document.addEventListener('keydown', e => {
@@ -705,47 +699,32 @@
       if (e.key === 'ArrowLeft') prev();
     });
 
-    // === BACKGROUND STICKERS (new set each slide) ===
+    // === BACKGROUND STICKERS ===
     const STICKER_START = 450938;
     const STICKER_TOTAL = 120;
     const STICKER_COUNT = 35;
 
     function generateStickers() {
       const container = document.getElementById('bgStickers');
-
-      // Fade out existing
       const existing = container.querySelectorAll('.bg-sticker');
       existing.forEach(el => el.classList.add('fading'));
-
       setTimeout(() => {
         container.innerHTML = '';
-
         for (let i = 0; i < STICKER_COUNT; i++) {
           const num = STICKER_START + Math.floor(Math.random() * STICKER_TOTAL);
           const img = document.createElement('img');
           img.className = 'bg-sticker';
           img.src = `background_pics_stickers/file_${num}.webp`;
-
-          const size = 45 + Math.random() * 85; // 45-130px
+          const size = 45 + Math.random() * 85;
           img.style.width = size + 'px';
           img.style.height = size + 'px';
           img.style.top = (Math.random() * 85 + 5) + '%';
           img.style.left = (Math.random() * 85 + 5) + '%';
           img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
-
           container.appendChild(img);
         }
       }, 300);
     }
-
-    // Keyboard
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    });
-
-    // Init
-    render();
   </script>
 </body>
 </html>

@@ -1,0 +1,175 @@
+{
+  "title": "Two Sides, A Story",
+  "description": "Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way OR NOT [:(] forward together.",
+  "person_a": {
+    "name": "A",
+    "tagline": "Wants to end this connection",
+    "avatar": "people/A.webp"
+  },
+  "person_b": {
+    "name": "B",
+    "tagline": "Wants to maintain this connection",
+    "avatar": "people/B.webp"
+  },
+  "phases": [
+    {
+      "name": "Before The Conversation",
+      "title": "Where They Stand",
+      "description": "Where each person stands before they've tried to bridge the gap.",
+      "topics": {
+        "Current Opinion": {
+          "status": "different",
+          "A": "We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.",
+          "B": "This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?"
+        },
+        "What They Want": {
+          "status": "different",
+          "A": "A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.",
+          "B": "Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here."
+        },
+        "What They Expect": {
+          "status": "close",
+          "A": "I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.",
+          "B": "I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness."
+        },
+        "A": {
+          "status": "different",
+          "A": "BU YAO",
+          "B": "YAO"
+        },
+        "B": {
+          "status": "different",
+          "A": "NO",
+          "B": "YES"
+        },
+        "C": {
+          "status": "different",
+          "A": "NEVER",
+          "B": "CHANCE"
+        },
+        "D": {
+          "status": "different",
+          "A": "ZERO",
+          "B": "ONCE"
+        },
+        "E": {
+          "status": "different",
+          "A": "PRESENT",
+          "B": "FUTURE"
+        },
+        "F": {
+          "status": "different",
+          "A": "BU YAO",
+          "B": "YAO"
+        },
+        "G": {
+          "status": "different",
+          "A": "NO",
+          "B": "YES"
+        },
+        "H": {
+          "status": "different",
+          "A": "NEVER",
+          "B": "CHANCE"
+        },
+        "I": {
+          "status": "different",
+          "A": "ZERO",
+          "B": "ONCE"
+        },
+        "J": {
+          "status": "different",
+          "A": "PRESENT",
+          "B": "FUTURE"
+        }
+      }
+    },
+    {
+      "name": "Present",
+      "title": "What They're Saying",
+      "description": "What they're actually trying to say to each other — the what, why, and how.",
+      "topics": {
+        "Trying to Say": {
+          "status": "close",
+          "A": "I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.",
+          "B": "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive."
+        },
+        "Why It Matters": {
+          "status": "aligned",
+          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
+          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+        },
+        "How to Resolve": {
+          "status": "close",
+          "A": "Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before we decide it's not for us.",
+          "B": "Let's slow down and explore why we feel this way first. If we move, I want it to come from clarity — not FOMO."
+        }
+      }
+    }
+  ],
+  "outcomes": {
+    "a": {
+      "title": "It ends — A's Path",
+      "A": {
+        "tag": "positive",
+        "tag_label": "Energised",
+        "points": {
+          "Feeling": "Alive. Validated. The world opened up and proved the leap was worth it.",
+          "Gained": "New perspective, new network, renewed sense of possibility. The relationship feels dynamic again.",
+          "Growing Edge": "If it doesn't work, the pressure to justify the sacrifice. The 'I told you so' that lingers unspoken."
+        }
+      },
+      "B": {
+        "tag": "neutral",
+        "tag_label": "Adapting",
+        "points": {
+          "Feeling": "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity.",
+          "Gained": "Proof of flexibility. Deeper understanding of what 'home' actually means to them.",
+          "Growing Edge": "Resentment if things go badly. A lingering feeling of not being heard."
+        }
+      }
+    },
+    "b": {
+      "title": "A fresh start — B's Path",
+      "A": {
+        "tag": "neutral",
+        "tag_label": "Restless",
+        "points": {
+          "Feeling": "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground.",
+          "Gained": "Security. Time to figure out if the urge to leave was about geography or something internal.",
+          "Growing Edge": "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left."
+        }
+      },
+      "B": {
+        "tag": "positive",
+        "tag_label": "Grounded",
+        "points": {
+          "Feeling": "Relieved. Like the foundation held. Space to build upward without losing everything.",
+          "Gained": "Deeper roots, stronger community, the satisfaction of choosing depth over novelty.",
+          "Growing Edge": "Guilt about 'winning.' Anxiety the other person resents the choice."
+        }
+      }
+    },
+    "compromise": {
+      "title": "Trial Run — The Compromise",
+      "A": {
+        "tag": "positive",
+        "tag_label": "Hopeful",
+        "points": {
+          "Feeling": "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now.",
+          "Gained": "A concrete plan instead of a daydream. The feeling of moving forward together.",
+          "Growing Edge": "If the trial succeeds, the permanence question returns. If it fails — was it a real try?"
+        }
+      },
+      "B": {
+        "tag": "positive",
+        "tag_label": "Respected",
+        "points": {
+          "Feeling": "Safe. A trial has an exit ramp — it's not a one-way door. This feels fair.",
+          "Gained": "Time. Data. A chance to experience the new without burning the old.",
+          "Growing Edge": "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities."
+        }
+      }
+    }
+  }
+}

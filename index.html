@@ -41,14 +41,128 @@
     }
     a:hover { background: #fff; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
     a span { display: block; font-size: 0.78rem; color: rgba(80,40,40,0.45); margin-top: 6px; font-weight: 500; }
+
+    /* Upload fallback */
+    .upload-area {
+      display: none;
+      cursor: pointer;
+      padding: 24px 40px;
+      border: 2px dashed rgba(80,50,50,0.2);
+      border-radius: 16px;
+      color: rgba(80,50,50,0.5);
+      font-size: 0.85rem;
+      text-align: center;
+      margin-bottom: 32px;
+      transition: border-color 0.2s ease;
+    }
+    .upload-area:hover { border-color: rgba(80,50,50,0.4); }
+    .upload-area strong { color: rgba(80,50,50,0.7); }
+
+    /* Reset button - subtle corner */
+    .reset-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(80,50,50,0.1);
+      background: rgba(255,255,255,0.5);
+      color: rgba(80,50,50,0.35);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: none;
+    }
+    .reset-btn:hover { background: rgba(255,255,255,0.8); color: rgba(80,50,50,0.6); border-color: rgba(80,50,50,0.2); }
   </style>
 </head>
 <body>
-  <h1>Two Sides, One Story</h1>
-  <p>Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way forward together.</p>
-  <div class="links">
+  <h1 id="title">Two Sides, One Story</h1>
+  <p id="desc">Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way forward together.</p>
+
+  <div class="upload-area" id="uploadArea">
+    Could not auto-load content.json<br><strong>Click here or drag & drop</strong> your content.json file
+    <input type="file" accept=".json" id="fileInput" style="display:none;">
+  </div>
+
+  <div class="links" id="links" style="display:none;">
     <a href="slides.html">Slides<span>Click through each part</span></a>
     <a href="scrollable.html">Scrollable<span>Flow through at your pace</span></a>
   </div>
+
+  <button class="reset-btn" id="resetBtn" onclick="resetContent()">Reset JSON</button>
+
+  <script>
+    const titleEl = document.getElementById('title');
+    const descEl = document.getElementById('desc');
+    const linksEl = document.getElementById('links');
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+
+    function onContentLoaded(data) {
+      // Store in sessionStorage so slides/scrollable can grab it
+      sessionStorage.setItem('content', JSON.stringify(data));
+
+      // Update index page text from JSON
+      if (data.title) titleEl.textContent = data.title;
+      if (data.description) descEl.textContent = data.description;
+
+      // Show links, hide upload, show reset
+      linksEl.style.display = 'flex';
+      uploadArea.style.display = 'none';
+      document.getElementById('resetBtn').style.display = 'block';
+    }
+
+    function resetContent() {
+      sessionStorage.removeItem('content');
+      linksEl.style.display = 'none';
+      uploadArea.style.display = 'block';
+      document.getElementById('resetBtn').style.display = 'none';
+      titleEl.textContent = 'Two Sides, One Story';
+      descEl.textContent = 'Upload a content.json to get started.';
+    }
+
+    // Auto-load via fetch
+    (async function() {
+      try {
+        const res = await fetch('content.json');
+        if (!res.ok) throw new Error('fetch failed');
+        const data = await res.json();
+        onContentLoaded(data);
+      } catch(e) {
+        // Show upload fallback
+        uploadArea.style.display = 'block';
+        linksEl.style.display = 'none';
+      }
+    })();
+
+    // Manual upload handlers
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'rgba(80,50,50,0.5)'; });
+    uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = 'rgba(80,50,50,0.2)'; });
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'rgba(80,50,50,0.2)';
+      const file = e.dataTransfer.files[0];
+      if (file) readFile(file);
+    });
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) readFile(file);
+    });
+
+    function readFile(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const data = JSON.parse(e.target.result);
+          onContentLoaded(data);
+        } catch(err) { alert('Invalid JSON file'); }
+      };
+      reader.readAsText(file);
+    }
+  </script>
 </body>
 </html>

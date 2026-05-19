@@ -546,354 +546,219 @@
 </head>
 <body>
 
-  <!-- Background stickers (randomly placed on each load) -->
   <div class="bg-stickers" id="bgStickers"></div>
-
-  <!-- INTRO -->
-  <div class="intro">
-    <h1>Two Sides</h1>
-    <p>Two people, one decision, different truths. Scroll through where they stand, what they're saying, and choose what happens next.</p>
-    <div class="intro-faces">
-      <div class="intro-face">
-        <div class="avatar">
-          <img src="people/A.webp" alt="Alex">
-        </div>
-        <div class="if-name">Alex</div>
-        <div class="if-sub">Wants change</div>
-      </div>
-      <div class="vs-badge">VS</div>
-      <div class="intro-face">
-        <div class="avatar">
-          <img src="people/B.webp" alt="Jordan">
-        </div>
-        <div class="if-name">Jordan</div>
-        <div class="if-sub">Wants stability</div>
-      </div>
-    </div>
-    <div class="scroll-cue">↓ scroll to begin ↓</div>
-  </div>
-
-  <!-- PHASE 1: BEFORE -->
-  <div class="phase-banner pb-before">
-    <div class="pb-num">Phase 1</div>
-    <h2>Before the Conversation</h2>
-    <p>Where each person stands — their positions, wants, and expectations — before they've tried to bridge the gap.</p>
-  </div>
-
-  <div class="narrative narrative-before">
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">Current Opinion <span class="status-dot conflict"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">What They Want <span class="status-dot conflict"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here.
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">What They Expect <span class="status-dot partial"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness.
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">How to Get There <span class="status-dot conflict"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        Double down here. Join new communities, explore parts of the city we've ignored. Bloom where we're planted.
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PHASE 2: PRESENT -->
-  <div class="phase-banner pb-present">
-    <div class="pb-num">Phase 2</div>
-    <h2>The Conversation</h2>
-    <p>What they're actually trying to say to each other — stripped of defensiveness, down to the what, why, and how.</p>
-  </div>
-
-  <div class="narrative narrative-present">
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">Trying to Say <span class="status-dot partial"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive.
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">Why It Matters <span class="status-dot aligned"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-
-    <div class="topic-marker" data-reveal>
-      <div class="tm-inner">How to Resolve <span class="status-dot partial"></span></div>
-    </div>
-    <div class="speech-pair" data-reveal>
-      <div class="speech-a">
-        Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before deciding it's not for us.
-        <div class="mini-avatar">
-          <img src="people/A.webp" alt="A">
-        </div>
-      </div>
-      <div class="speech-gap"></div>
-      <div class="speech-b">
-        Let's slow down and explore why we feel this way first. If we move, let it come from clarity — not from FOMO.
-        <div class="mini-avatar">
-          <img src="people/B.webp" alt="B">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PHASE 3: DECIDE -->
-  <div class="phase-banner pb-decide">
-    <div class="pb-num">Phase 3</div>
-    <h2>The Decision</h2>
-    <p>Someone's needs take priority — or they find a middle ground. Choose a path.</p>
-  </div>
-
-  <div class="decision-area">
-    <h2>Whose path is chosen?</h2>
-    <p class="da-sub">Each leads to a different outcome for both of them.</p>
-
-    <div class="road-container">
-      <!-- 3-way fork SVG -->
-      <svg class="road-svg" viewBox="0 0 700 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Trunk -->
-        <path d="M350 0 L350 35" stroke="rgba(80,40,40,0.12)" stroke-width="4" stroke-linecap="round"/>
-        <!-- Fork point -->
-        <circle cx="350" cy="35" r="6" fill="rgba(80,40,40,0.1)" stroke="rgba(80,40,40,0.15)" stroke-width="2"/>
-        <!-- Left branch -->
-        <path d="M350 35 C350 60, 117 70, 117 115" stroke="rgba(255,107,107,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
-        <!-- Center branch -->
-        <path d="M350 35 L350 115" stroke="rgba(116,185,255,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
-        <!-- Right branch -->
-        <path d="M350 35 C350 60, 583 70, 583 115" stroke="rgba(78,205,196,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
-        <!-- End dots -->
-        <circle cx="117" cy="115" r="4" fill="rgba(255,107,107,0.4)"/>
-        <circle cx="350" cy="115" r="4" fill="rgba(116,185,255,0.4)"/>
-        <circle cx="583" cy="115" r="4" fill="rgba(78,205,196,0.4)"/>
-      </svg>
-
-      <div class="path-cards">
-        <div class="path-card" onclick="selectOutcome('a', this)">
-          <span class="pc-icon"><img src="people/A.webp" alt="Alex"></span>
-          <h3>Alex's Way</h3>
-          <p>They move. The desire for change takes priority.</p>
-        </div>
-        <div class="path-card" onclick="selectOutcome('compromise', this)">
-          <span class="pc-icon"><img src="people/A.webp" alt="Alex"><img src="people/B.webp" alt="Jordan"></span>
-          <h3>Compromise</h3>
-          <p>A trial run — neither fully wins or loses.</p>
-        </div>
-        <div class="path-card" onclick="selectOutcome('b', this)">
-          <span class="pc-icon"><img src="people/B.webp" alt="Jordan"></span>
-          <h3>Jordan's Way</h3>
-          <p>They stay. Stability takes priority.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- OUTCOME -->
-  <div class="outcome-area" id="outcomeArea">
-    <div class="outcome-title" id="outcomeTitle"></div>
-    <div class="outcome-split" id="outcomeSplit"></div>
-    <div class="reset-bar">
-      <button class="reset-btn" onclick="resetChoice()">← Choose a different path</button>
+  <div id="app">
+    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px;">
+      <p style="color:rgba(80,50,50,0.5); font-size:0.9rem;">Loading...</p>
     </div>
   </div>
 
   <script>
-    // === OUTCOME DATA ===
-    const outcomes = {
-      a: {
-        title: "They Move — Alex's Path",
-        a: { tag: "positive", tagLabel: "Energised", points: [
-          { label: "Feeling", value: "Alive. Validated. The world opened up and proved the leap was worth it." },
-          { label: "What They Gained", value: "New perspective, new network, renewed possibility. The relationship feels dynamic again." },
-          { label: "The Risk", value: "If it doesn't work, the pressure to justify the sacrifice. The unspoken 'I told you so.'" }
-        ]},
-        b: { tag: "neutral", tagLabel: "Adapting", points: [
-          { label: "Feeling", value: "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity." },
-          { label: "What They Gained", value: "Proof of flexibility. A deeper understanding of what 'home' actually means to them." },
-          { label: "The Risk", value: "Resentment if things go badly. A lingering feeling of not being heard." }
-        ]}
-      },
-      b: {
-        title: "They Stay — Jordan's Path",
-        a: { tag: "neutral", tagLabel: "Restless", points: [
-          { label: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground." },
-          { label: "What They Gained", value: "Security. Time to figure out if the urge to leave was about geography or something internal." },
-          { label: "The Risk", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
-        ]},
-        b: { tag: "positive", tagLabel: "Grounded", points: [
-          { label: "Feeling", value: "Relieved. The foundation held. Space to build upward without the anxiety of losing everything." },
-          { label: "What They Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
-          { label: "The Risk", value: "Guilt about 'winning.' Worry the other person silently resents the choice." }
-        ]}
-      },
-      compromise: {
-        title: "Trial Run — The Compromise",
-        a: { tag: "positive", tagLabel: "Hopeful", points: [
-          { label: "Feeling", value: "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now." },
-          { label: "What They Gained", value: "A concrete plan instead of a daydream. The feeling of moving forward together." },
-          { label: "The Risk", value: "If the trial succeeds, the permanence question returns. If it fails — was it enough of a real try?" }
-        ]},
-        b: { tag: "positive", tagLabel: "Respected", points: [
-          { label: "Feeling", value: "Safe. A trial has an exit ramp — it's not a one-way door. The stakes feel manageable." },
-          { label: "What They Gained", value: "Time. Data. A chance to experience the new without burning the old." },
-          { label: "The Risk", value: "Limbo. Two half-lives instead of one whole one. Holding two realities at once is exhausting." }
-        ]}
+    // === AUTO-LOAD ===
+    (async function autoLoad() {
+      let data;
+      const cached = sessionStorage.getItem('content');
+      if (cached) {
+        try { data = JSON.parse(cached); } catch(e) {}
       }
-    };
-
-    const avatarA = `<img src="people/A.webp" alt="Alex">`;
-    const avatarB = `<img src="people/B.webp" alt="Jordan">`;
-
-    // === SCROLL REVEAL ===
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+      if (!data) {
+        try {
+          const res = await fetch('content.json');
+          if (!res.ok) throw new Error();
+          data = await res.json();
+        } catch(e) {
+          document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;"><p style="color:rgba(80,50,50,0.5);">Could not load content.json. Please open from index.html first.</p></div>';
+          return;
         }
+      }
+      initData(data);
+    })();
+
+    function initData(data) {
+      const pA = data.person_a;
+      const pB = data.person_b;
+
+      let html = '';
+
+      // INTRO
+      html += `
+        <div class="intro">
+          <h1>${data.title}</h1>
+          <p>${data.description}</p>
+          <div class="intro-faces">
+            <div class="intro-face">
+              <div class="avatar"><img src="${pA.avatar}" alt="${pA.name}"></div>
+              <div class="if-name">${pA.name}</div>
+              <div class="if-sub">${pA.tagline}</div>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="intro-face">
+              <div class="avatar"><img src="${pB.avatar}" alt="${pB.name}"></div>
+              <div class="if-name">${pB.name}</div>
+              <div class="if-sub">${pB.tagline}</div>
+            </div>
+          </div>
+          <div class="scroll-cue">&darr; scroll to begin &darr;</div>
+        </div>
+      `;
+
+      // PHASES
+      data.phases.forEach((phase, idx) => {
+        const bannerClass = idx === 0 ? 'pb-before' : idx === 1 ? 'pb-present' : 'pb-decide';
+        html += `
+          <div class="phase-banner ${bannerClass}">
+            <div class="pb-num">Phase ${idx + 1}</div>
+            <h2>${phase.title}</h2>
+            <p>${phase.description || ''}</p>
+          </div>
+        `;
+
+        const narrativeClass = idx === 0 ? 'narrative-before' : 'narrative-present';
+        html += `<div class="narrative ${narrativeClass}">`;
+
+        Object.entries(phase.topics).forEach(([topic, val]) => {
+          html += `
+            <div class="topic-marker" data-reveal>
+              <div class="tm-inner">${topic} <span class="status-dot ${val.status}"></span></div>
+            </div>
+            <div class="speech-pair" data-reveal>
+              <div class="speech-a">
+                ${val.A}
+                <div class="mini-avatar"><img src="${pA.avatar}" alt="${pA.name}"></div>
+              </div>
+              <div class="speech-gap"></div>
+              <div class="speech-b">
+                ${val.B}
+                <div class="mini-avatar"><img src="${pB.avatar}" alt="${pB.name}"></div>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
       });
-    }, { threshold: 0.15 });
 
-    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+      // Decision banner
+      html += `
+        <div class="phase-banner pb-decide">
+          <div class="pb-num">Phase ${data.phases.length + 1}</div>
+          <h2>The Decision</h2>
+          <p>Someone's needs take priority — or they find a middle ground.</p>
+        </div>
+      `;
 
-    // === CHOICE ===
+      // Decision area with road-container (original structure)
+      html += `
+        <div class="decision-area">
+          <h2>Whose path is chosen?</h2>
+          <p class="da-sub">Each leads to a different outcome for both of them.</p>
+          <div class="road-container">
+            <svg class="road-svg" viewBox="0 0 700 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M350 0 L350 35" stroke="rgba(80,40,40,0.12)" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="350" cy="35" r="6" fill="rgba(80,40,40,0.1)" stroke="rgba(80,40,40,0.15)" stroke-width="2"/>
+              <path d="M350 35 C350 60, 117 70, 117 115" stroke="rgba(255,179,120,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+              <path d="M350 35 L350 115" stroke="rgba(116,185,255,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+              <path d="M350 35 C350 60, 583 70, 583 115" stroke="rgba(127,219,202,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+              <circle cx="117" cy="115" r="4" fill="rgba(255,179,120,0.4)"/>
+              <circle cx="350" cy="115" r="4" fill="rgba(116,185,255,0.4)"/>
+              <circle cx="583" cy="115" r="4" fill="rgba(127,219,202,0.4)"/>
+            </svg>
+            <div class="path-cards">
+              <div class="path-card" onclick="selectOutcome('a', this)">
+                <span class="pc-icon"><img src="${pA.avatar}" alt="${pA.name}"></span>
+                <h3>${pA.name}'s Way</h3>
+                <p>Their path takes priority.</p>
+              </div>
+              <div class="path-card" onclick="selectOutcome('compromise', this)">
+                <span class="pc-icon"><img src="${pA.avatar}" alt="${pA.name}"><img src="${pB.avatar}" alt="${pB.name}"></span>
+                <h3>Compromise</h3>
+                <p>A middle ground for both.</p>
+              </div>
+              <div class="path-card" onclick="selectOutcome('b', this)">
+                <span class="pc-icon"><img src="${pB.avatar}" alt="${pB.name}"></span>
+                <h3>${pB.name}'s Way</h3>
+                <p>Their path takes priority.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Outcome area
+      html += `
+        <div class="outcome-area" id="outcomeArea">
+          <div class="outcome-title" id="outcomeTitle"></div>
+          <div class="outcome-split" id="outcomeSplit"></div>
+          <div class="reset-bar">
+            <button class="reset-btn" onclick="resetChoice()">← Choose a different path</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('app').innerHTML = html;
+
+      // Scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+      // Scatter stickers
+      scatterStickers();
+
+      // Store for outcome handler
+      window._outcomes = data.outcomes;
+      window._pA = pA;
+      window._pB = pB;
+    }
+
+    // === OUTCOME HANDLER ===
     function selectOutcome(choice, el) {
       document.querySelectorAll('.path-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
 
-      const outcome = outcomes[choice];
+      const outcome = window._outcomes[choice];
+      const pA = window._pA;
+      const pB = window._pB;
       const area = document.getElementById('outcomeArea');
-      const title = document.getElementById('outcomeTitle');
-      const split = document.getElementById('outcomeSplit');
 
-      title.innerHTML = `
+      document.getElementById('outcomeTitle').innerHTML = `
         <h3>${outcome.title}</h3>
         <p class="ot-sub">How each person experiences this outcome</p>
       `;
 
-      split.innerHTML = `
+      const buildPoints = (points) => Object.entries(points).map(([label, value]) => `
+        <div class="outcome-point">
+          <div class="op-label">${label}</div>
+          <div class="op-value">${value}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('outcomeSplit').innerHTML = `
         <div class="outcome-col col-a">
           <div class="outcome-col-header">
-            <div class="oc-avatar">${avatarA}</div>
+            <div class="oc-avatar"><img src="${pA.avatar}" alt="${pA.name}"></div>
             <div class="oc-info">
-              <div class="oc-name">Alex</div>
-              <span class="oc-tag ${outcome.a.tag}">${outcome.a.tagLabel}</span>
+              <div class="oc-name">${pA.name}</div>
+              <span class="oc-tag ${outcome.A.tag}">${outcome.A.tag_label}</span>
             </div>
           </div>
-          ${outcome.a.points.map(p => `
-            <div class="outcome-point">
-              <div class="op-label">${p.label}</div>
-              <div class="op-value">${p.value}</div>
-            </div>
-          `).join('')}
+          ${buildPoints(outcome.A.points)}
         </div>
         <div class="outcome-col col-b">
           <div class="outcome-col-header">
-            <div class="oc-avatar">${avatarB}</div>
+            <div class="oc-avatar"><img src="${pB.avatar}" alt="${pB.name}"></div>
             <div class="oc-info">
-              <div class="oc-name">Jordan</div>
-              <span class="oc-tag ${outcome.b.tag}">${outcome.b.tagLabel}</span>
+              <div class="oc-name">${pB.name}</div>
+              <span class="oc-tag ${outcome.B.tag}">${outcome.B.tag_label}</span>
             </div>
           </div>
-          ${outcome.b.points.map(p => `
-            <div class="outcome-point">
-              <div class="op-label">${p.label}</div>
-              <div class="op-value">${p.value}</div>
-            </div>
-          `).join('')}
+          ${buildPoints(outcome.B.points)}
         </div>
       `;
 
       area.classList.add('visible');
-
-      setTimeout(() => {
-        area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 150);
+      setTimeout(() => area.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
     }
 
     function resetChoice() {
@@ -902,49 +767,33 @@
       document.querySelector('.decision-area').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // === BACKGROUND STICKERS (scattered down the full page) ===
-    (function scatterStickers() {
+    // === BACKGROUND STICKERS ===
+    function scatterStickers() {
       const container = document.getElementById('bgStickers');
       const totalFiles = 120;
       const startNum = 450938;
-      const count = 80; // lots of stickers down the full page
+      const count = 80;
 
-      // Get full page height
-      const pageHeight = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        5000
-      );
-
-      // Set container to full page height
+      const pageHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, 5000);
       container.style.height = pageHeight + 'px';
 
-      // Pick random stickers (allow repeats for variety)
       for (let i = 0; i < count; i++) {
         const num = startNum + Math.floor(Math.random() * totalFiles);
-
         const img = document.createElement('img');
         img.className = 'bg-sticker';
         img.src = `background_pics_stickers/file_${num}.webp`;
         img.loading = 'lazy';
-
-        const size = 50 + Math.random() * 90; // 50-140px
+        const size = 50 + Math.random() * 90;
         img.style.width = size + 'px';
         img.style.height = size + 'px';
-
-        // Distribute evenly down the page with some randomness
         const yBase = (i / count) * pageHeight;
         const yJitter = (Math.random() - 0.5) * 200;
         img.style.top = (yBase + yJitter) + 'px';
-
-        // Scatter across the full width
         img.style.left = (Math.random() * 90 + 3) + '%';
-
         img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
-
         container.appendChild(img);
       }
-    })();
+    }
   </script>
 </body>
 </html>
