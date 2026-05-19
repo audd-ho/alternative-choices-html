@@ -76,9 +76,34 @@
       display: none;
     }
     .reset-btn:hover { background: rgba(255,255,255,0.8); color: rgba(80,50,50,0.6); border-color: rgba(80,50,50,0.2); }
+
+    /* Scattered images */
+    .scatter-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .scatter-img {
+      position: absolute;
+      border-radius: 10px;
+      object-fit: cover;
+      opacity: 0.6;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Keep centre content above */
+    h1, p, .upload-area, .links, .reset-btn {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+  <div class="scatter-container" id="scatterContainer"></div>
+
   <h1 id="title">Two Sides, One Story</h1>
   <p id="desc">Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way forward together.</p>
 
@@ -163,6 +188,64 @@
       };
       reader.readAsText(file);
     }
+
+    // === SCATTER IMAGES AROUND THE EDGES (ring/circle pattern) ===
+    (function scatterImages() {
+      const container = document.getElementById('scatterContainer');
+      const files = [
+        '0d8e1ea003ec3d6766a87fb63b893befe704c8beca45a24c2c8008b5c29a021b.webp',
+        '1775570508742chinese actor zhang linghe from pursuitof jade.avif',
+        '5deb818c7b678f45734b8e325115409e.jpg',
+        '74539cba7db8cc13e73813d22d90caa7.jpg',
+        '76f5ca64-1576-4a54-8450-55976e80a57a.jpg',
+        'B6FtNKtgSqRqbnNsbSFsFFh2P8F4Qvjl5avopBgNsFYbhaFrRoRDLb6gvl8Fl1rORAJap.jpg',
+        'f2b0fcde07.jpg',
+        'FE40z_rXoAAO2Vl.jpg',
+        'images_zlh.jpg',
+        'images_zlh2.jpg',
+        'images_zlh3.jpg',
+        'images_zlh4.jpg',
+        'images_zlh5.jpg',
+        'images.jpg',
+        'l0K1mJ_2f.png',
+        'SnapInsta.to_503110171_17928777672057457_3553153852473854475_n-1.webp',
+        'what-are-your-thoughts-on-zhang-linghe-as-an-actor-v0-61fif9oin52f1.webp',
+        'YY1bQP_5c.jpg',
+        'zhang-linghe-bagikan-pemotretan-sebagai-45b988.webp',
+        'Zhang-Linghe-Tanggapi-Kekhawatiran-Soal-Tubuh-Kurus-Saat-Syuting-Variety-Show.webp'
+      ];
+
+      const count = files.length;
+      const cx = 50; // center x %
+      const cy = 50; // center y %
+
+      // Shuffle files randomly
+      const shuffled = files.sort(() => Math.random() - 0.5);
+
+      shuffled.forEach((file, i) => {
+        const img = document.createElement('img');
+        img.className = 'scatter-img';
+        img.src = `zlh/${file}`;
+        img.loading = 'lazy';
+
+        const size = 70 + Math.random() * 60; // 70-130px
+        img.style.width = size + 'px';
+        img.style.height = size + 'px';
+
+        // Place in a ring around centre — radius keeps them away from middle
+        const angle = (i / count) * Math.PI * 2 + (Math.random() * 0.4 - 0.2);
+        const radius = 32 + Math.random() * 12; // 32-44% from center
+
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius;
+
+        img.style.left = `calc(${x}% - ${size/2}px)`;
+        img.style.top = `calc(${y}% - ${size/2}px)`;
+        img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+
+        container.appendChild(img);
+      });
+    })();
   </script>
 </body>
 </html>
