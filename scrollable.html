@@ -35,361 +35,452 @@
       margin-bottom: 12px;
     }
 
-    .intro p {
+    .intro > p {
       font-size: 1.05rem;
-      color: rgba(80,40,40,0.65);
-      max-width: 500px;
+      color: rgba(80,40,40,0.6);
+      max-width: 480px;
       line-height: 1.6;
-      margin-bottom: 36px;
-    }
-
-    .intro-people {
-      display: flex;
-      gap: 48px;
       margin-bottom: 48px;
     }
 
-    .intro-person {
-      text-align: center;
+    .intro-faces {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 48px;
     }
 
-    .intro-person .ip-name {
-      font-size: 1.2rem;
+    .intro-face {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.7);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .avatar svg { width: 100%; height: 100%; }
+
+    .intro-face .if-name { font-size: 1.1rem; font-weight: 700; }
+    .intro-face:first-child .if-name { color: #d63031; }
+    .intro-face:last-child .if-name { color: #00897b; }
+    .intro-face .if-sub { font-size: 0.78rem; color: rgba(80,40,40,0.45); }
+
+    .vs-badge {
+      font-size: 0.75rem;
       font-weight: 700;
+      color: rgba(80,40,40,0.25);
+      letter-spacing: 2px;
     }
 
-    .intro-person:first-child .ip-name { color: #d63031; }
-    .intro-person:last-child .ip-name { color: #00b894; }
-
-    .intro-person .ip-sub {
+    .scroll-cue {
       font-size: 0.8rem;
-      color: rgba(80,40,40,0.5);
+      color: rgba(80,40,40,0.35);
+      animation: drift 2.5s ease-in-out infinite;
     }
 
-    .scroll-hint {
-      font-size: 0.8rem;
-      color: rgba(80,40,40,0.4);
-      animation: bounce 2s infinite;
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(8px); opacity: 1; }
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    /* === PHASE DIVIDERS === */
-    .phase-divider {
-      padding: 80px 40px;
+    /* === PHASE BANNERS === */
+    .phase-banner {
+      padding: 100px 40px;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
 
-    .phase-divider.phase-before {
-      background: linear-gradient(180deg, #ff9a9e 0%, #ffecd2 100%);
-    }
-
-    .phase-divider.phase-present {
-      background: linear-gradient(180deg, #ffecd2 0%, #a1c4fd 100%);
-    }
-
-    .phase-divider.phase-decide {
-      background: linear-gradient(180deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
-    }
-
-    .pd-label {
-      font-size: 0.7rem;
+    .phase-banner .pb-num {
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: rgba(80,40,40,0.4);
-      margin-bottom: 8px;
+      color: rgba(80,40,40,0.3);
+      margin-bottom: 10px;
     }
 
-    .pd-title {
-      font-size: 1.8rem;
+    .phase-banner h2 {
+      font-size: 2rem;
       font-weight: 700;
       color: #3d2020;
       margin-bottom: 10px;
     }
 
-    .pd-desc {
-      font-size: 0.9rem;
-      color: rgba(80,40,40,0.55);
-      max-width: 480px;
+    .phase-banner p {
+      font-size: 0.92rem;
+      color: rgba(80,40,40,0.5);
+      max-width: 460px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* Thematic transition: diverging paths */
-    .phase-before::after {
+    .pb-before { background: linear-gradient(180deg, #ff9a9e 0%, #ffecd2 100%); }
+    .pb-present { background: linear-gradient(180deg, #ffecd2 0%, #c2e9fb 100%); }
+    .pb-decide { background: linear-gradient(180deg, #c2e9fb 0%, #fbc2eb 100%); }
+
+    /* === SCROLL NARRATIVE (unique to scrollable) === */
+    /* Instead of a table, use a flowing conversation-like layout */
+    .narrative {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      position: relative;
+    }
+
+    /* Center thread line */
+    .narrative::before {
       content: '';
       position: absolute;
+      top: 0;
       bottom: 0;
       left: 50%;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(80,40,40,0.06), rgba(80,40,40,0.1), rgba(80,40,40,0.06));
       transform: translateX(-50%);
-      width: 3px;
-      height: 40px;
-      background: linear-gradient(180deg, transparent, rgba(80,40,40,0.1));
     }
 
-    /* === TABLE SECTIONS === */
-    .comparison-section {
-      padding: 20px 0 60px;
-      background: #fff8f0;
-    }
-
-    /* Sticky column headers */
-    .col-headers {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: grid;
-      grid-template-columns: 1fr 140px 1fr;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      background: rgba(255,248,240,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .ch {
+    /* Topic marker (centered) */
+    .topic-marker {
+      position: relative;
       text-align: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 10px;
-      border-radius: 12px;
-    }
-
-    .ch-a {
-      background: rgba(255,107,107,0.1);
-      color: #d63031;
-      border: 1.5px solid rgba(255,107,107,0.2);
-    }
-
-    .ch-center {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: rgba(80,40,40,0.3);
-      align-self: center;
-    }
-
-    .ch-b {
-      background: rgba(78,205,196,0.1);
-      color: #00b894;
-      border: 1.5px solid rgba(78,205,196,0.2);
-    }
-
-    /* Table rows */
-    .comp-row {
-      display: grid;
-      grid-template-columns: 1fr 140px 1fr;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      margin-bottom: 16px;
+      margin: 48px 0 24px;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: all 0.6s ease;
     }
 
-    .comp-row.visible {
+    .topic-marker.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Diverging effect for "before" */
-    .section-before .comp-row .cell-a { transform: translateX(-4px); transition: transform 0.5s ease; }
-    .section-before .comp-row .cell-b { transform: translateX(4px); transition: transform 0.5s ease; }
-    .section-before .comp-row.visible .cell-a { transform: translateX(-4px); }
-    .section-before .comp-row.visible .cell-b { transform: translateX(4px); }
-
-    /* Converging effect for "present" */
-    .section-present .comp-row .cell-a { transform: translateX(2px); }
-    .section-present .comp-row .cell-b { transform: translateX(-2px); }
-
-    .cell {
+    .topic-marker .tm-inner {
+      display: inline-block;
       background: #fff;
-      border-radius: 14px;
-      padding: 20px;
-      font-size: 0.9rem;
-      line-height: 1.65;
-      color: #4a3a3a;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .cell-a {
-      border-left: 3px solid rgba(255,107,107,0.4);
-    }
-
-    .cell-b {
-      border-right: 3px solid rgba(78,205,196,0.4);
-    }
-
-    /* Center topic column */
-    .topic-cell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px 8px;
-    }
-
-    .topic-inner {
+      border: 1.5px solid rgba(80,40,40,0.08);
+      border-radius: 30px;
+      padding: 8px 20px;
       font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(80,40,40,0.45);
-      background: rgba(255,255,255,0.8);
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.04);
-      line-height: 1.3;
+      letter-spacing: 1.5px;
+      color: rgba(80,40,40,0.5);
+      position: relative;
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
 
-    .status-indicator {
-      display: block;
-      width: 8px;
-      height: 8px;
+    .tm-inner .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      margin: 8px auto 0;
+      margin-left: 8px;
+      vertical-align: middle;
     }
 
-    .status-indicator.conflict { background: #ff6b6b; }
-    .status-indicator.aligned { background: #2ed573; }
-    .status-indicator.partial { background: #ffa502; }
+    .status-dot.conflict { background: #ff6b6b; }
+    .status-dot.aligned { background: #2ed573; }
+    .status-dot.partial { background: #ffa502; }
 
-    /* === CHOICE SECTION === */
-    .choice-section {
-      padding: 80px 40px 100px;
-      background: linear-gradient(180deg, #c2e9fb 0%, #fbc2eb 50%, #ffecd2 100%);
-      text-align: center;
-      min-height: 80vh;
+    /* Speech pair: A on left, B on right */
+    .speech-pair {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      margin-bottom: 12px;
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .speech-pair.visible { opacity: 1; }
+
+    .speech-pair.visible .speech-a {
+      transform: translateX(0);
+    }
+
+    .speech-pair.visible .speech-b {
+      transform: translateX(0);
+    }
+
+    .speech-a, .speech-b {
+      padding: 20px 22px;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #4a3a3a;
+      position: relative;
+      transition: transform 0.6s ease;
+    }
+
+    .speech-a {
+      background: rgba(255,107,107,0.06);
+      border: 1px solid rgba(255,107,107,0.12);
+      border-radius: 18px 18px 4px 18px;
+      text-align: right;
+      transform: translateX(-20px);
+    }
+
+    .speech-b {
+      background: rgba(78,205,196,0.06);
+      border: 1px solid rgba(78,205,196,0.12);
+      border-radius: 18px 18px 18px 4px;
+      text-align: left;
+      transform: translateX(20px);
+    }
+
+    /* Mini avatar in speech */
+    .speech-a .mini-avatar,
+    .speech-b .mini-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      bottom: -14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .speech-a .mini-avatar { right: 12px; }
+    .speech-b .mini-avatar { left: 12px; }
+
+    .mini-avatar svg { width: 100%; height: 100%; }
+
+    /* Center gap between speeches */
+    .speech-gap {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .choice-section h2 {
-      font-size: 1.8rem;
-      color: #3d2020;
-      margin-bottom: 8px;
-    }
+    /* Before section: speeches push apart */
+    .narrative-before .speech-pair.visible .speech-a { transform: translateX(-6px); }
+    .narrative-before .speech-pair.visible .speech-b { transform: translateX(6px); }
 
-    .choice-section .cs-sub {
-      font-size: 0.9rem;
-      color: rgba(80,40,40,0.5);
-      margin-bottom: 48px;
-    }
+    /* Present section: speeches come together */
+    .narrative-present .speech-pair.visible .speech-a { transform: translateX(4px); }
+    .narrative-present .speech-pair.visible .speech-b { transform: translateX(-4px); }
 
-    /* 3-way fork visual */
-    .fork {
+    /* === DECISION SECTION === */
+    .decision-area {
+      padding: 60px 24px 100px;
+      background: linear-gradient(180deg, #fbc2eb 0%, #ffecd2 30%, #fff8f0 100%);
+      text-align: center;
       position: relative;
-      max-width: 800px;
-      width: 100%;
     }
 
-    .fork-path-svg {
+    .decision-area h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #3d2020;
+      margin-bottom: 6px;
+    }
+
+    .decision-area .da-sub {
+      font-size: 0.9rem;
+      color: rgba(80,40,40,0.45);
+      margin-bottom: 56px;
+    }
+
+    /* The road/path that splits */
+    .road-container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .road-svg {
       display: block;
       width: 100%;
-      height: 80px;
-      margin-bottom: -4px;
+      height: 120px;
     }
 
-    .fork-options {
+    .path-cards {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
+      gap: 16px;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
-    .fork-opt {
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(8px);
-      border: 2px solid rgba(255,255,255,0.9);
+    .path-card {
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.04);
       border-radius: 20px;
-      padding: 28px 20px;
+      padding: 28px 18px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
     }
 
-    .fork-opt:hover {
+    .path-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .path-card:nth-child(1)::before { background: linear-gradient(90deg, #ff6b6b, #feca57); }
+    .path-card:nth-child(2)::before { background: linear-gradient(90deg, #a55eea, #667eea); }
+    .path-card:nth-child(3)::before { background: linear-gradient(90deg, #4ecdc4, #44bd9e); }
+
+    .path-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      border-color: transparent;
     }
 
-    .fork-opt:nth-child(1):hover { border-color: #ff6b6b; }
-    .fork-opt:nth-child(2):hover { border-color: #a55eea; }
-    .fork-opt:nth-child(3):hover { border-color: #4ecdc4; }
+    .path-card:hover::before { opacity: 1; }
 
-    .fork-opt.selected {
-      border-color: #a55eea !important;
-      background: rgba(165,94,234,0.08);
-      box-shadow: 0 8px 30px rgba(165,94,234,0.12);
+    .path-card:nth-child(1):hover { border-color: rgba(255,107,107,0.3); }
+    .path-card:nth-child(2):hover { border-color: rgba(165,94,234,0.3); }
+    .path-card:nth-child(3):hover { border-color: rgba(78,205,196,0.3); }
+
+    .path-card.selected {
+      border-color: rgba(165,94,234,0.4) !important;
+      box-shadow: 0 8px 28px rgba(165,94,234,0.1);
       transform: translateY(-6px) scale(1.02);
     }
 
-    .fork-opt .fo-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .fork-opt h3 { font-size: 1rem; font-weight: 700; color: #3d2020; margin-bottom: 6px; }
-    .fork-opt p { font-size: 0.8rem; color: rgba(80,40,40,0.55); line-height: 1.4; }
+    .path-card.selected::before { opacity: 1; }
 
-    /* === OUTCOME SECTION === */
-    .outcome-section {
+    .path-card .pc-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .path-card h3 { font-size: 0.95rem; font-weight: 700; color: #3d2020; margin-bottom: 6px; }
+    .path-card p { font-size: 0.78rem; color: rgba(80,40,40,0.5); line-height: 1.4; }
+
+    /* === OUTCOME === */
+    .outcome-area {
       display: none;
-      padding: 20px 0 80px;
+      padding: 60px 24px 80px;
       background: #fff8f0;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .outcome-section.visible {
+    .outcome-area.visible {
       display: block;
-      animation: fadeIn 0.5s ease;
+      animation: riseIn 0.6s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .outcome-title-bar {
+    .outcome-title {
       text-align: center;
-      padding: 40px 24px 20px;
+      margin-bottom: 40px;
     }
 
-    .outcome-title-bar h3 {
-      font-size: 1.3rem;
+    .outcome-title h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
       color: #3d2020;
       margin-bottom: 4px;
     }
 
-    .outcome-title-bar .ot-sub {
+    .outcome-title .ot-sub {
       font-size: 0.8rem;
       color: rgba(80,40,40,0.4);
     }
 
-    .outcome-tag {
+    /* Outcome uses split columns with avatars */
+    .outcome-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .outcome-col {
+      position: relative;
+    }
+
+    .outcome-col-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .outcome-col-header .oc-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .outcome-col-header .oc-avatar svg { width: 100%; height: 100%; }
+
+    .outcome-col-header .oc-info .oc-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .outcome-col.col-a .oc-name { color: #d63031; }
+    .outcome-col.col-b .oc-name { color: #00897b; }
+
+    .outcome-col-header .oc-info .oc-tag {
       display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .oc-tag.positive { background: rgba(46,213,115,0.12); color: #00b894; }
+    .oc-tag.neutral { background: rgba(255,165,2,0.12); color: #e17055; }
+
+    .outcome-point {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .outcome-point .op-label {
       font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 4px 12px;
-      border-radius: 6px;
-      margin-bottom: 12px;
+      letter-spacing: 1.2px;
+      color: rgba(80,40,40,0.35);
+      margin-bottom: 8px;
     }
 
-    .outcome-tag.positive { background: rgba(46,213,115,0.12); color: #00b894; }
-    .outcome-tag.neutral { background: rgba(255,165,2,0.12); color: #e17055; }
+    .outcome-point .op-value {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #4a3a3a;
+    }
+
+    .outcome-col.col-a .outcome-point { border-left: 3px solid rgba(255,107,107,0.3); }
+    .outcome-col.col-b .outcome-point { border-left: 3px solid rgba(78,205,196,0.3); }
 
     /* Reset */
     .reset-bar {
       text-align: center;
-      padding: 20px 0 60px;
+      padding: 32px 0 80px;
     }
 
     .reset-btn {
@@ -398,9 +489,9 @@
       font-weight: 600;
       padding: 12px 28px;
       border-radius: 50px;
-      border: 2px solid rgba(80,40,40,0.12);
-      background: rgba(255,255,255,0.7);
-      color: rgba(80,40,40,0.6);
+      border: 2px solid rgba(80,40,40,0.1);
+      background: rgba(255,255,255,0.8);
+      color: rgba(80,40,40,0.55);
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -408,15 +499,17 @@
     .reset-btn:hover { background: #fff; color: #3d2020; border-color: rgba(80,40,40,0.2); }
 
     /* Mobile */
-    @media (max-width: 800px) {
-      .comp-row, .col-headers { grid-template-columns: 1fr; gap: 8px; }
-      .col-headers { grid-template-columns: 1fr 1fr; }
-      .ch-center { display: none; }
-      .topic-cell { padding: 12px 0; }
-      .topic-inner { width: 100%; }
-      .fork-options { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
-      .fork-path-svg { display: none; }
+    @media (max-width: 768px) {
+      .speech-pair { grid-template-columns: 1fr; gap: 12px; }
+      .speech-gap { display: none; }
+      .speech-a { text-align: left; border-radius: 18px; transform: none !important; }
+      .speech-b { border-radius: 18px; transform: none !important; }
+      .narrative::before { display: none; }
+      .path-cards { grid-template-columns: 1fr; max-width: 320px; }
+      .road-svg { display: none; }
+      .outcome-split { grid-template-columns: 1fr; }
       .intro h1 { font-size: 2rem; }
+      .intro-faces { gap: 24px; }
     }
   </style>
 </head>
@@ -425,130 +518,239 @@
   <!-- INTRO -->
   <div class="intro">
     <h1>Two Sides</h1>
-    <p>Two people, one decision. Scroll to see where they stand, what they're really saying, and what happens next.</p>
-    <div class="intro-people">
-      <div class="intro-person">
-        <div class="ip-name">Alex</div>
-        <div class="ip-sub">Wants change</div>
+    <p>Two people, one decision, different truths. Scroll through where they stand, what they're saying, and choose what happens next.</p>
+    <div class="intro-faces">
+      <div class="intro-face">
+        <div class="avatar">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" fill="#ffe0d6"/>
+            <circle cx="40" cy="34" r="16" fill="#ff8a75"/>
+            <ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/>
+            <circle cx="34" cy="31" r="2.5" fill="#fff"/>
+            <circle cx="46" cy="31" r="2.5" fill="#fff"/>
+            <path d="M35 38 Q40 42 45 38" stroke="#d63031" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M28 22 Q34 17 42 20" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M38 20 Q46 16 52 22" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="if-name">Alex</div>
+        <div class="if-sub">Wants change</div>
       </div>
-      <div style="align-self:center; color: rgba(80,40,40,0.25); font-size:0.8rem;">vs</div>
-      <div class="intro-person">
-        <div class="ip-name">Jordan</div>
-        <div class="ip-sub">Wants stability</div>
+      <div class="vs-badge">VS</div>
+      <div class="intro-face">
+        <div class="avatar">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" fill="#d4f5f0"/>
+            <circle cx="40" cy="34" r="16" fill="#81d4c4"/>
+            <ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/>
+            <circle cx="34" cy="31" r="2.5" fill="#fff"/>
+            <circle cx="46" cy="31" r="2.5" fill="#fff"/>
+            <path d="M35 38 Q40 41 45 38" stroke="#00897b" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <rect x="26" y="20" width="28" height="4" rx="2" fill="#44bd9e"/>
+            <rect x="30" y="17" width="20" height="4" rx="2" fill="#44bd9e"/>
+          </svg>
+        </div>
+        <div class="if-name">Jordan</div>
+        <div class="if-sub">Wants stability</div>
       </div>
     </div>
-    <div class="scroll-hint">↓ scroll to begin ↓</div>
+    <div class="scroll-cue">↓ scroll to begin ↓</div>
   </div>
 
   <!-- PHASE 1: BEFORE -->
-  <div class="phase-divider phase-before">
-    <div class="pd-label">Phase 1</div>
-    <div class="pd-title">Before the Conversation</div>
-    <div class="pd-desc">Where each person stands before they've tried to bridge the gap. Their positions, wants, and expectations.</div>
+  <div class="phase-banner pb-before">
+    <div class="pb-num">Phase 1</div>
+    <h2>Before the Conversation</h2>
+    <p>Where each person stands — their positions, wants, and expectations — before they've tried to bridge the gap.</p>
   </div>
 
-  <div class="comparison-section section-before">
-    <div class="col-headers">
-      <div class="ch ch-a">Alex</div>
-      <div class="ch-center">Topic</div>
-      <div class="ch ch-b">Jordan</div>
+  <div class="narrative narrative-before">
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">Current Opinion <span class="status-dot conflict"></span></div>
+    </div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.</div>
-      <div class="topic-cell"><div class="topic-inner">Current Opinion<span class="status-indicator conflict"></span></div></div>
-      <div class="cell cell-b">This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?</div>
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">What They Want <span class="status-dot conflict"></span></div>
+    </div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">A fresh start. New environment, new challenges. That spark you only get when everything is unfamiliar.</div>
-      <div class="topic-cell"><div class="topic-inner">What They Want<span class="status-indicator conflict"></span></div></div>
-      <div class="cell cell-b">Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here.</div>
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">What They Expect <span class="status-dot partial"></span></div>
+    </div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">I expect us to be honest about feeling stuck. I expect we'll take a real chance instead of defaulting to comfort.</div>
-      <div class="topic-cell"><div class="topic-inner">What They Expect<span class="status-indicator partial"></span></div></div>
-      <div class="cell cell-b">I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness.</div>
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">How to Get There <span class="status-dot conflict"></span></div>
     </div>
-
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.</div>
-      <div class="topic-cell"><div class="topic-inner">How to Get There<span class="status-indicator conflict"></span></div></div>
-      <div class="cell cell-b">Double down here. Join new communities, explore parts of the city we've ignored. Bloom where we're planted.</div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        Double down here. Join new communities, explore parts of the city we've ignored. Bloom where we're planted.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- PHASE 2: PRESENT -->
-  <div class="phase-divider phase-present">
-    <div class="pd-label">Phase 2</div>
-    <div class="pd-title">The Conversation</div>
-    <div class="pd-desc">What they're actually trying to say to each other — the what, the why, and the how.</div>
+  <div class="phase-banner pb-present">
+    <div class="pb-num">Phase 2</div>
+    <h2>The Conversation</h2>
+    <p>What they're actually trying to say to each other — stripped of defensiveness, down to the what, why, and how.</p>
   </div>
 
-  <div class="comparison-section section-present">
-    <div class="col-headers">
-      <div class="ch ch-a">Alex</div>
-      <div class="ch-center">Topic</div>
-      <div class="ch ch-b">Jordan</div>
+  <div class="narrative narrative-present">
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">Trying to Say <span class="status-dot partial"></span></div>
+    </div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.</div>
-      <div class="topic-cell"><div class="topic-inner">Trying to Say<span class="status-indicator partial"></span></div></div>
-      <div class="cell cell-b">I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive.</div>
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">Why It Matters <span class="status-dot aligned"></span></div>
+    </div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage.</div>
-      <div class="topic-cell"><div class="topic-inner">Why It Matters<span class="status-indicator aligned"></span></div></div>
-      <div class="cell cell-b">Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present.</div>
+    <div class="topic-marker" data-reveal>
+      <div class="tm-inner">How to Resolve <span class="status-dot partial"></span></div>
     </div>
-
-    <div class="comp-row" data-reveal>
-      <div class="cell cell-a">Let's try — even temporarily. A trial period. Give the new thing a real shot before deciding it's not for us.</div>
-      <div class="topic-cell"><div class="topic-inner">How to Resolve<span class="status-indicator partial"></span></div></div>
-      <div class="cell cell-b">Let's slow down and explore why we feel this way first. If we move, let it come from clarity — not from FOMO.</div>
+    <div class="speech-pair" data-reveal>
+      <div class="speech-a">
+        Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before deciding it's not for us.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="speech-gap"></div>
+      <div class="speech-b">
+        Let's slow down and explore why we feel this way first. If we move, let it come from clarity — not from FOMO.
+        <div class="mini-avatar">
+          <svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/></svg>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- PHASE 3: DECIDE -->
-  <div class="phase-divider phase-decide">
-    <div class="pd-label">Phase 3</div>
-    <div class="pd-title">The Decision</div>
-    <div class="pd-desc">Someone's needs take priority — or they find a middle ground.</div>
+  <div class="phase-banner pb-decide">
+    <div class="pb-num">Phase 3</div>
+    <h2>The Decision</h2>
+    <p>Someone's needs take priority — or they find a middle ground. Choose a path.</p>
   </div>
 
-  <!-- CHOICE -->
-  <div class="choice-section" id="choiceSection">
+  <div class="decision-area">
     <h2>Whose path is chosen?</h2>
-    <p class="cs-sub">Click a path to see both people's outcomes, side by side.</p>
-    <div class="fork">
-      <svg class="fork-path-svg" viewBox="0 0 800 80" fill="none">
-        <!-- Single trunk -->
-        <path d="M400 0 L400 20" stroke="rgba(80,40,40,0.15)" stroke-width="3" stroke-linecap="round"/>
-        <!-- Split point -->
-        <circle cx="400" cy="20" r="5" fill="rgba(80,40,40,0.12)"/>
-        <!-- Left branch (A) -->
-        <path d="M400 20 C400 45, 135 45, 135 75" stroke="rgba(255,107,107,0.35)" stroke-width="3" stroke-linecap="round"/>
-        <!-- Center branch (Compromise) -->
-        <path d="M400 20 L400 75" stroke="rgba(165,94,234,0.35)" stroke-width="3" stroke-linecap="round"/>
-        <!-- Right branch (B) -->
-        <path d="M400 20 C400 45, 665 45, 665 75" stroke="rgba(78,205,196,0.35)" stroke-width="3" stroke-linecap="round"/>
+    <p class="da-sub">Each leads to a different outcome for both of them.</p>
+
+    <div class="road-container">
+      <!-- 3-way fork SVG -->
+      <svg class="road-svg" viewBox="0 0 700 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Trunk -->
+        <path d="M350 0 L350 35" stroke="rgba(80,40,40,0.12)" stroke-width="4" stroke-linecap="round"/>
+        <!-- Fork point -->
+        <circle cx="350" cy="35" r="6" fill="rgba(80,40,40,0.1)" stroke="rgba(80,40,40,0.15)" stroke-width="2"/>
+        <!-- Left branch -->
+        <path d="M350 35 C350 60, 117 70, 117 115" stroke="rgba(255,107,107,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+        <!-- Center branch -->
+        <path d="M350 35 L350 115" stroke="rgba(165,94,234,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+        <!-- Right branch -->
+        <path d="M350 35 C350 60, 583 70, 583 115" stroke="rgba(78,205,196,0.3)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+        <!-- End dots -->
+        <circle cx="117" cy="115" r="4" fill="rgba(255,107,107,0.4)"/>
+        <circle cx="350" cy="115" r="4" fill="rgba(165,94,234,0.4)"/>
+        <circle cx="583" cy="115" r="4" fill="rgba(78,205,196,0.4)"/>
       </svg>
-      <div class="fork-options">
-        <div class="fork-opt" onclick="selectOutcome('a', this)">
-          <span class="fo-icon">🔥</span>
+
+      <div class="path-cards">
+        <div class="path-card" onclick="selectOutcome('a', this)">
+          <span class="pc-icon">🔥</span>
           <h3>Alex's Way</h3>
-          <p>They move. The desire for change wins.</p>
+          <p>They move. The desire for change takes priority.</p>
         </div>
-        <div class="fork-opt" onclick="selectOutcome('compromise', this)">
-          <span class="fo-icon">🤝</span>
+        <div class="path-card" onclick="selectOutcome('compromise', this)">
+          <span class="pc-icon">🤝</span>
           <h3>Compromise</h3>
-          <p>Trial run. Neither fully wins or loses.</p>
+          <p>A trial run — neither fully wins or loses.</p>
         </div>
-        <div class="fork-opt" onclick="selectOutcome('b', this)">
-          <span class="fo-icon">🌿</span>
+        <div class="path-card" onclick="selectOutcome('b', this)">
+          <span class="pc-icon">🌿</span>
           <h3>Jordan's Way</h3>
           <p>They stay. Stability takes priority.</p>
         </div>
@@ -557,62 +759,60 @@
   </div>
 
   <!-- OUTCOME -->
-  <div class="outcome-section" id="outcomeSection">
-    <div class="outcome-title-bar" id="outcomeTitleBar"></div>
-    <div class="col-headers">
-      <div class="ch ch-a" id="outcomeHeaderA">Alex</div>
-      <div class="ch-center">Topic</div>
-      <div class="ch ch-b" id="outcomeHeaderB">Jordan</div>
-    </div>
-    <div id="outcomeRows"></div>
+  <div class="outcome-area" id="outcomeArea">
+    <div class="outcome-title" id="outcomeTitle"></div>
+    <div class="outcome-split" id="outcomeSplit"></div>
     <div class="reset-bar">
       <button class="reset-btn" onclick="resetChoice()">← Choose a different path</button>
     </div>
   </div>
 
   <script>
-    // === DATA ===
+    // === OUTCOME DATA ===
     const outcomes = {
       a: {
         title: "They Move — Alex's Path",
         a: { tag: "positive", tagLabel: "Energised", points: [
-          { topic: "Feeling", value: "Alive. Validated. The world opened up and proved the leap was worth it." },
-          { topic: "Gained", value: "New perspective, new network, renewed possibility. The relationship feels dynamic again." },
-          { topic: "Risk", value: "If it doesn't work, the pressure to justify the sacrifice. The unspoken 'I told you so.'" }
+          { label: "Feeling", value: "Alive. Validated. The world opened up and proved the leap was worth it." },
+          { label: "What They Gained", value: "New perspective, new network, renewed possibility. The relationship feels dynamic again." },
+          { label: "The Risk", value: "If it doesn't work, the pressure to justify the sacrifice. The unspoken 'I told you so.'" }
         ]},
         b: { tag: "neutral", tagLabel: "Adapting", points: [
-          { topic: "Feeling", value: "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity." },
-          { topic: "Gained", value: "Proof of flexibility. Deeper understanding of what 'home' actually means." },
-          { topic: "Risk", value: "Resentment if things go badly. A lingering feeling of not being heard." }
+          { label: "Feeling", value: "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity." },
+          { label: "What They Gained", value: "Proof of flexibility. A deeper understanding of what 'home' actually means to them." },
+          { label: "The Risk", value: "Resentment if things go badly. A lingering feeling of not being heard." }
         ]}
       },
       b: {
         title: "They Stay — Jordan's Path",
         a: { tag: "neutral", tagLabel: "Restless", points: [
-          { topic: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground." },
-          { topic: "Gained", value: "Security. Time to figure out if the urge to leave was about geography or something internal." },
-          { topic: "Risk", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
+          { label: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground." },
+          { label: "What They Gained", value: "Security. Time to figure out if the urge to leave was about geography or something internal." },
+          { label: "The Risk", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
         ]},
         b: { tag: "positive", tagLabel: "Grounded", points: [
-          { topic: "Feeling", value: "Relieved. The foundation held. Space to build upward without anxiety of losing everything." },
-          { topic: "Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
-          { topic: "Risk", value: "Guilt about 'winning.' Worry the other person might silently resent the choice." }
+          { label: "Feeling", value: "Relieved. The foundation held. Space to build upward without the anxiety of losing everything." },
+          { label: "What They Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
+          { label: "The Risk", value: "Guilt about 'winning.' Worry the other person silently resents the choice." }
         ]}
       },
       compromise: {
         title: "Trial Run — The Compromise",
         a: { tag: "positive", tagLabel: "Hopeful", points: [
-          { topic: "Feeling", value: "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now." },
-          { topic: "Gained", value: "A concrete plan. Agency. Moving forward together rather than pulling apart." },
-          { topic: "Risk", value: "If the trial succeeds, the permanence question returns. If it fails — was it enough?" }
+          { label: "Feeling", value: "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now." },
+          { label: "What They Gained", value: "A concrete plan instead of a daydream. The feeling of moving forward together." },
+          { label: "The Risk", value: "If the trial succeeds, the permanence question returns. If it fails — was it enough of a real try?" }
         ]},
         b: { tag: "positive", tagLabel: "Respected", points: [
-          { topic: "Feeling", value: "Safe. A trial has an exit ramp — not a one-way door. The stakes feel manageable." },
-          { topic: "Gained", value: "Time. Data. Experience the new without burning the old." },
-          { topic: "Risk", value: "Limbo. Two half-lives instead of one whole one. Holding two realities at once." }
+          { label: "Feeling", value: "Safe. A trial has an exit ramp — it's not a one-way door. The stakes feel manageable." },
+          { label: "What They Gained", value: "Time. Data. A chance to experience the new without burning the old." },
+          { label: "The Risk", value: "Limbo. Two half-lives instead of one whole one. Holding two realities at once is exhausting." }
         ]}
       }
     };
+
+    const avatarA = `<svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/><path d="M35 38 Q40 42 45 38" stroke="#d63031" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M28 22 Q34 17 42 20" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M38 20 Q46 16 52 22" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+    const avatarB = `<svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/><path d="M35 38 Q40 41 45 38" stroke="#00897b" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="26" y="20" width="28" height="4" rx="2" fill="#44bd9e"/><rect x="30" y="17" width="20" height="4" rx="2" fill="#44bd9e"/></svg>`;
 
     // === SCROLL REVEAL ===
     const observer = new IntersectionObserver((entries) => {
@@ -621,54 +821,69 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
     // === CHOICE ===
     function selectOutcome(choice, el) {
-      // Highlight selected
-      document.querySelectorAll('.fork-opt').forEach(o => o.classList.remove('selected'));
+      document.querySelectorAll('.path-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
 
       const outcome = outcomes[choice];
-      const section = document.getElementById('outcomeSection');
-      const titleBar = document.getElementById('outcomeTitleBar');
-      const headerA = document.getElementById('outcomeHeaderA');
-      const headerB = document.getElementById('outcomeHeaderB');
-      const rowsContainer = document.getElementById('outcomeRows');
+      const area = document.getElementById('outcomeArea');
+      const title = document.getElementById('outcomeTitle');
+      const split = document.getElementById('outcomeSplit');
 
-      titleBar.innerHTML = `
+      title.innerHTML = `
         <h3>${outcome.title}</h3>
         <p class="ot-sub">How each person experiences this outcome</p>
       `;
 
-      headerA.innerHTML = `<span class="outcome-tag ${outcome.a.tag}">${outcome.a.tagLabel}</span> Alex`;
-      headerB.innerHTML = `<span class="outcome-tag ${outcome.b.tag}">${outcome.b.tagLabel}</span> Jordan`;
-
-      let rowsHtml = '';
-      for (let i = 0; i < outcome.a.points.length; i++) {
-        rowsHtml += `
-          <div class="comp-row visible" style="animation-delay: ${i * 0.1}s">
-            <div class="cell cell-a">${outcome.a.points[i].value}</div>
-            <div class="topic-cell"><div class="topic-inner">${outcome.a.points[i].topic}</div></div>
-            <div class="cell cell-b">${outcome.b.points[i].value}</div>
+      split.innerHTML = `
+        <div class="outcome-col col-a">
+          <div class="outcome-col-header">
+            <div class="oc-avatar">${avatarA}</div>
+            <div class="oc-info">
+              <div class="oc-name">Alex</div>
+              <span class="oc-tag ${outcome.a.tag}">${outcome.a.tagLabel}</span>
+            </div>
           </div>
-        `;
-      }
-      rowsContainer.innerHTML = rowsHtml;
+          ${outcome.a.points.map(p => `
+            <div class="outcome-point">
+              <div class="op-label">${p.label}</div>
+              <div class="op-value">${p.value}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="outcome-col col-b">
+          <div class="outcome-col-header">
+            <div class="oc-avatar">${avatarB}</div>
+            <div class="oc-info">
+              <div class="oc-name">Jordan</div>
+              <span class="oc-tag ${outcome.b.tag}">${outcome.b.tagLabel}</span>
+            </div>
+          </div>
+          ${outcome.b.points.map(p => `
+            <div class="outcome-point">
+              <div class="op-label">${p.label}</div>
+              <div class="op-value">${p.value}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
 
-      section.classList.add('visible');
+      area.classList.add('visible');
 
       setTimeout(() => {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200);
+        area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
     }
 
     function resetChoice() {
-      document.querySelectorAll('.fork-opt').forEach(o => o.classList.remove('selected'));
-      document.getElementById('outcomeSection').classList.remove('visible');
-      document.getElementById('choiceSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.querySelectorAll('.path-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('outcomeArea').classList.remove('visible');
+      document.querySelector('.decision-area').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   </script>
 </body>
