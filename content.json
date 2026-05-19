@@ -39,8 +39,8 @@
         },
         "Friends?": {
           "status": "different",
-          "A": "不要，没理由，不想再见了，浪费时间",
-          "B": "要，虽然不想失去这个朋友了，但如果真的不行了，还是希望能保持朋友关系的。"
+          "A": "不要，没理由，不想再见了，浪费时间。",
+          "B": "要，把问题解决了，进步后，我们还可以当好朋友。比之前还要好，毕竟更了解彼此了，如果说了还不改，放弃（断绝）还可以。因为我不想失去这个朋友了。"
         }
       }
     },
@@ -50,11 +50,21 @@
       "description": "What they're actually trying to say to each other — the what, why, and how.",
       "topics": {
         "Trying to Say": {
-          "status": "close",
-          "A": "I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.",
+          "status": "different",
+          "A": "I dislike this connection. This relationship is draining and doesn't bring me joy. I have better things to do and want this to end.",
           "B": "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive."
         },
         "Why It Matters": {
+          "status": "aligned",
+          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
+          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+        },
+        "Problem Surfaced": {
+          "status": "aligned",
+          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
+          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+        },
+        "Reaction to Problem/Opinion of the Other": {
           "status": "aligned",
           "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
           "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
