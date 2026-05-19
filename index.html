@@ -106,8 +106,8 @@
       sessionStorage.setItem('content', JSON.stringify(data));
 
       // Update index page text from JSON
-      if (data.title) titleEl.textContent = data.title;
-      if (data.description) descEl.textContent = data.description;
+      if (data.title) titleEl.innerHTML = data.title;
+      if (data.description) descEl.innerHTML = data.description;
 
       // Show links, hide upload, show reset
       linksEl.style.display = 'flex';
