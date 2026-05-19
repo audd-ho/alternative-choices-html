@@ -8,7 +8,7 @@
   },
   "person_b": {
     "name": "B",
-    "tagline": "Wants to maintain this connection",
+    "tagline": "Wants to maintain this connection [idk, nothing is impossible, never give up -> too stubborn though]",
     "avatar": "people/B.webp"
   },
   "phases": [
@@ -51,28 +51,33 @@
       "topics": {
         "Trying to Say": {
           "status": "different",
-          "A": "I dislike this connection. This relationship is draining and doesn't bring me joy. I have better things to do and want this to end.",
-          "B": "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive."
-        },
-        "Why It Matters": {
-          "status": "aligned",
-          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
-          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+          "A": "Say what you want to say quickly. I dislike this connection. This relationship is draining and doesn't bring me joy. I have better things to do and want this to end.",
+          "B": "I want to hear the issues you have (ask questions to understand) and work on myself and to improve the relationship. I want to fix this connection because I care about it and see potential for growth."
         },
         "Problem Surfaced": {
-          "status": "aligned",
-          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
-          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+          "status": "close",
+          "A": "You are too pushy and overstep boundaries. I feel drained and unhappy in this relationship.",
+          "B": "I overstepped her boundaries, especially so with the Ipad incident. I also feel annoying to text so much when she doesnt want to reply and ghosts, like i should shut up alr."
         },
         "Reaction to Problem/Opinion of the Other": {
           "status": "aligned",
-          "A": "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
-          "B": "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'"
+          "A": "He is not listening, I already said that I don't want to maintain this connection and he keeps trying to fix it. He is being pushy and just wants it his way.",
+          "B": "I hear her, she thinks I am being too pushy and I overstepped boundaries. She feels drained talking to me and I don't bring her joy. She finds the relationship meaningless and does not want to maintain the connection. I understand the concerns she raised and I know these issues can be resolved and the relationship can be improved if I work on myself and we both put in the effort to make it work. However, I also understand that she has better things to do and does not want to waste time on this relationship."
+        },
+        "Personal Thoughts": {
+          "status": "different",
+          "A": "Bro annoying af, he just wants it his way and doesn't listen to me. I don't want to maintain this connection and I don't see any point in it. I have better things to do and I want this to end.",
+          "B": "I am being pushy in trying to fix and maintain the connection when she does not want to engage, and not giving her space when she wants it. I just don't want to give up and I believe it can work out. But what value is there in it for her? Why should she want to maintain this connection? If it meant sacrificing time on things she can find joy in, to take this risk in this relationship, why would she want to do that? Even if it can improve, why would she wait around for it or give it a chance when she can just do something else that brings her joy?"
+        },
+        "Why It Matters": {
+          "status": "different",
+          "A": "I have hobbies I find more joy in and would also prefer spending time with other people who I find more enjoyable to be around. Why risk maintaining this connection and wait for the change or help out here, it does not bring me any joy or benefit",
+          "B": "If I give her space, I worry that it will be the permanent end of our relationship and that she will not want to maintain it at all. I am also worried that if I try to fix things, it will come across as me being pushy and not respecting her feelings and boundaries, which is not my intention at all. Honestly though? If she does not want to maintain this connection, there is no way to get through to her if she is not willing to give it a chance since she will not loosen up and everything will be 'sian' to her. Like fr, if you dont find the person fun and keep thinking about how you have better things to do, then no matter how fun the activity or any conversation is, you will never find it fun or anything, since you already have that predisposition to not find it fun. So if she is not willing to give it a chance and loosen up, its just gg here. Best analogy I can think of is, you know that guy you say he looks weird based on appearance and posture? because he is socially awkward? but even if he is a fun guy or cool guy, like he loves pokemon go, you will never find him fun or cool because you already have that predisposition to not find him fun or cool. So if you are not willing to give it a chance and loosen up, its just gg here."
         },
         "How to Resolve": {
-          "status": "close",
-          "A": "Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before we decide it's not for us.",
-          "B": "Let's slow down and explore why we feel this way first. If we move, I want it to come from clarity — not FOMO."
+          "status": "different",
+          "A": "Put a full stop to this connection and end it after this conversation. I don't want to maintain this connection and I don't see any point in it. I have better things to do and I want this to end.",
+          "B": "I am open to trying a trial period or test run to see if we can improve the relationship and make it work. I think it could be a good way to give this a real shot and see if it brings us joy and benefits without fully giving up or accepting it right away. It would also give us both a chance to see if we can resolve the issues and make the relationship better before making a final decision on whether to maintain it or not."
         }
       }
     }
