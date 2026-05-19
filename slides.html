@@ -193,14 +193,13 @@
 
     /* Answer cells */
     .cell {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.55);
       border-radius: 16px;
       padding: 18px 20px;
       font-size: 0.9rem;
       line-height: 1.6;
       color: #3d3d3d;
-      border: 1px solid rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.6);
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
@@ -413,6 +412,7 @@
     #app {
       position: relative;
       z-index: 1;
+      pointer-events: auto;
     }
   </style>
 </head>
@@ -458,22 +458,24 @@
       }
     })();
 
-    // Manual upload fallback
+    // Manual upload fallback (only attach if elements exist)
     const uploadArea = document.getElementById('uploadFallback');
     const fileInput = document.getElementById('fileInput');
 
-    uploadArea.addEventListener('click', () => fileInput.click());
-    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'rgba(80,50,50,0.5)'; });
-    uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = 'rgba(80,50,50,0.2)'; });
-    uploadArea.addEventListener('drop', e => {
-      e.preventDefault();
-      const file = e.dataTransfer.files[0];
-      if (file) readFile(file);
-    });
-    fileInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (file) readFile(file);
-    });
+    if (uploadArea && fileInput) {
+      uploadArea.addEventListener('click', () => fileInput.click());
+      uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'rgba(80,50,50,0.5)'; });
+      uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = 'rgba(80,50,50,0.2)'; });
+      uploadArea.addEventListener('drop', e => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file) readFile(file);
+      });
+      fileInput.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (file) readFile(file);
+      });
+    }
 
     function readFile(file) {
       const reader = new FileReader();
@@ -725,6 +727,9 @@
         }
       }, 300);
     }
+
+    // Generate stickers immediately on page load (don't wait for JSON)
+    generateStickers();
   </script>
 </body>
 </html>
