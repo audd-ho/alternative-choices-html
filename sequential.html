@@ -11,7 +11,7 @@
     body {
       font-family: 'Fredoka', sans-serif;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe8d6 50%, #ffd4c4 100%);
       overflow: hidden;
       transition: background 0.8s ease;
     }
@@ -93,7 +93,7 @@
       top: 0;
       z-index: 10;
       padding: 12px 0;
-      background: linear-gradient(180deg, rgba(255,236,210,0.95) 0%, rgba(255,236,210,0) 100%);
+      background: linear-gradient(180deg, rgba(255,245,230,0.95) 0%, rgba(255,245,230,0) 100%);
     }
 
     .col-header {
@@ -116,18 +116,18 @@
       flex-shrink: 0;
     }
 
-    .col-avatar svg { width: 100%; height: 100%; }
+    .col-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
     .col-header.person-a {
-      background: rgba(255,107,107,0.15);
-      color: #d63031;
-      border: 2px solid rgba(255,107,107,0.25);
+      background: rgba(255,200,160,0.2);
+      color: #e07030;
+      border: 2px solid rgba(255,180,130,0.25);
     }
 
     .col-header.person-b {
-      background: rgba(78,205,196,0.15);
-      color: #00b894;
-      border: 2px solid rgba(78,205,196,0.25);
+      background: rgba(160,230,220,0.2);
+      color: #20a090;
+      border: 2px solid rgba(140,210,200,0.25);
     }
 
     .col-header.center-label {
@@ -189,9 +189,9 @@
       margin: 6px auto 0;
     }
 
-    .status-dot.conflict { background: #ff6b6b; }
+    .status-dot.different { background: #ffa502; }
     .status-dot.aligned { background: #2ed573; }
-    .status-dot.partial { background: #ffa502; }
+    .status-dot.close { background: #74b9ff; }
 
     /* Answer cells */
     .cell {
@@ -207,11 +207,11 @@
     }
 
     .cell.cell-a {
-      border-left: 3px solid rgba(255,107,107,0.5);
+      border-left: 3px solid rgba(255,179,120,0.4);
     }
 
     .cell.cell-b {
-      border-right: 3px solid rgba(78,205,196,0.5);
+      border-right: 3px solid rgba(127,219,202,0.4);
     }
 
     /* === CHOICE VIEW === */
@@ -332,8 +332,8 @@
       margin-bottom: 12px;
     }
 
-    .outcome-tag.positive { background: rgba(46,213,115,0.15); color: #00b894; }
-    .outcome-tag.neutral { background: rgba(255,165,2,0.15); color: #e17055; }
+    .outcome-tag.positive { background: rgba(127,219,180,0.15); color: #20a060; }
+    .outcome-tag.neutral { background: rgba(255,200,130,0.15); color: #d08030; }
 
     /* === BOTTOM NAV === */
     .bottom-nav {
@@ -387,10 +387,39 @@
       .fork-cards { grid-template-columns: 1fr; }
       .fork-branches { display: none; }
     }
+
+    /* === BACKGROUND STICKERS === */
+    .bg-stickers {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-sticker {
+      position: absolute;
+      opacity: 0.35;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .bg-sticker.fading {
+      opacity: 0;
+      transform: scale(0.8) rotate(0deg) !important;
+    }
+
+    #app {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
 
+  <div class="bg-stickers" id="bgStickers"></div>
   <div id="app"></div>
 
   <script>
@@ -398,14 +427,14 @@
     const personA = { name: "Alex", tagline: "Wants change" };
     const personB = { name: "Jordan", tagline: "Wants stability" };
 
-    const avatarA = `<div class="col-avatar"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#ffe0d6"/><circle cx="40" cy="34" r="16" fill="#ff8a75"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#ff6b6b"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/><path d="M35 38 Q40 42 45 38" stroke="#d63031" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M28 22 Q34 17 42 20" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M38 20 Q46 16 52 22" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>`;
-    const avatarB = `<div class="col-avatar"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#d4f5f0"/><circle cx="40" cy="34" r="16" fill="#81d4c4"/><ellipse cx="40" cy="72" rx="22" ry="18" fill="#4ecdc4"/><circle cx="34" cy="31" r="2.5" fill="#fff"/><circle cx="46" cy="31" r="2.5" fill="#fff"/><path d="M35 38 Q40 41 45 38" stroke="#00897b" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="26" y="20" width="28" height="4" rx="2" fill="#44bd9e"/><rect x="30" y="17" width="20" height="4" rx="2" fill="#44bd9e"/></svg></div>`;
+    const avatarA = `<div class="col-avatar"><img src="people/A.jpg" alt="Alex"></div>`;
+    const avatarB = `<div class="col-avatar"><img src="people/B.jpg" alt="Jordan"></div>`;
 
     const backgrounds = [
-      "linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%)",
-      "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #d4fc79 100%)",
-      "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 50%, #ffecd2 100%)",
-      "linear-gradient(135deg, #d4fc79 0%, #96e6a1 50%, #84fab0 100%)"
+      "linear-gradient(135deg, #fff5e6 0%, #ffe8d6 50%, #ffd4c4 100%)",
+      "linear-gradient(135deg, #e8f8ff 0%, #d4f0ff 50%, #c8ecf8 100%)",
+      "linear-gradient(135deg, #f5eaff 0%, #ede0ff 50%, #e8d8ff 100%)",
+      "linear-gradient(135deg, #e6fff5 0%, #d4ffe8 50%, #c8f8e0 100%)"
     ];
 
     const sections = [
@@ -413,16 +442,16 @@
         phase: "Before",
         title: "Where They Stand",
         rows: [
-          { topic: "Current Opinion", status: "conflict",
+          { topic: "Current Opinion", status: "different",
             a: "We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.",
             b: "This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?" },
-          { topic: "What They Want", status: "conflict",
+          { topic: "What They Want", status: "different",
             a: "A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.",
             b: "Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here." },
-          { topic: "What They Expect", status: "partial",
+          { topic: "What They Expect", status: "close",
             a: "I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.",
             b: "I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness." },
-          { topic: "How to Get There", status: "conflict",
+          { topic: "How to Get There", status: "different",
             a: "Research cities, set a timeline, apply remotely. Make it real — not just a daydream. Commit to a date.",
             b: "Double down here. Join new communities, explore our own city, reinvest in relationships. Bloom where we're planted." }
         ]
@@ -431,13 +460,13 @@
         phase: "Present",
         title: "What They're Saying",
         rows: [
-          { topic: "Trying to Say", status: "partial",
+          { topic: "Trying to Say", status: "close",
             a: "I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared staying still means shrinking.",
             b: "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive." },
           { topic: "Why It Matters", status: "aligned",
             a: "Because I love us enough to want the best version of our life. I worry 'good enough' becomes a cage if we never test it.",
             b: "Because I love us enough to fight for what's working. I worry always chasing 'better' means never being present in 'now.'" },
-          { topic: "How to Resolve", status: "partial",
+          { topic: "How to Resolve", status: "close",
             a: "Let's try — even temporarily. A trial period, a test run. Give the new thing a real shot before we decide it's not for us.",
             b: "Let's slow down and explore why we feel this way first. If we move, I want it to come from clarity — not FOMO." }
         ]
@@ -447,44 +476,44 @@
     const outcomes = {
       a: {
         title: "They Move — Alex's Path",
-        bg: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%)",
+        bg: "linear-gradient(135deg, #fff0e6 0%, #ffe6f0 50%, #fff5e6 100%)",
         a: { tag: "positive", tagLabel: "Energised", points: [
           { topic: "Feeling", value: "Alive. Validated. The world opened up and proved the leap was worth it." },
           { topic: "Gained", value: "New perspective, new network, renewed sense of possibility. The relationship feels dynamic again." },
-          { topic: "Risk", value: "If it doesn't work, the pressure to justify the sacrifice. The 'I told you so' that lingers unspoken." }
+          { topic: "Growing Edge", value: "If it doesn't work, the pressure to justify the sacrifice. The 'I told you so' that lingers unspoken." }
         ]},
         b: { tag: "neutral", tagLabel: "Adapting", points: [
           { topic: "Feeling", value: "Uprooted but trying. Grief for what was left behind, mixed with cautious curiosity." },
           { topic: "Gained", value: "Proof of flexibility. Deeper understanding of what 'home' actually means to them." },
-          { topic: "Risk", value: "Resentment if things go badly. A lingering feeling of not being heard." }
+          { topic: "Growing Edge", value: "Resentment if things go badly. A lingering feeling of not being heard." }
         ]}
       },
       b: {
         title: "They Stay — Jordan's Path",
-        bg: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 50%, #a1c4fd 100%)",
+        bg: "linear-gradient(135deg, #e6fff5 0%, #e0f8ff 50%, #e6f5ff 100%)",
         a: { tag: "neutral", tagLabel: "Restless", points: [
           { topic: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch goes underground." },
           { topic: "Gained", value: "Security. Time to figure out if the urge to leave was about geography or something internal." },
-          { topic: "Risk", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
+          { topic: "Growing Edge", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' they should have left." }
         ]},
         b: { tag: "positive", tagLabel: "Grounded", points: [
           { topic: "Feeling", value: "Relieved. Like the foundation held. Space to build upward without losing everything." },
           { topic: "Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
-          { topic: "Risk", value: "Guilt about 'winning.' Anxiety the other person resents the choice." }
+          { topic: "Growing Edge", value: "Guilt about 'winning.' Anxiety the other person resents the choice." }
         ]}
       },
       compromise: {
         title: "Trial Run — The Compromise",
-        bg: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 50%, #c2e9fb 100%)",
+        bg: "linear-gradient(135deg, #f5eaff 0%, #e8f0ff 50%, #eaf5ff 100%)",
         a: { tag: "positive", tagLabel: "Hopeful", points: [
           { topic: "Feeling", value: "Heard. The door is open, not slammed shut. The possibility is real — that's enough for now." },
           { topic: "Gained", value: "A concrete plan instead of a daydream. The feeling of moving forward together." },
-          { topic: "Risk", value: "If the trial succeeds, the permanence question returns. If it fails — was it a real try?" }
+          { topic: "Growing Edge", value: "If the trial succeeds, the permanence question returns. If it fails — was it a real try?" }
         ]},
         b: { tag: "positive", tagLabel: "Respected", points: [
           { topic: "Feeling", value: "Safe. A trial has an exit ramp — it's not a one-way door. This feels fair." },
           { topic: "Gained", value: "Time. Data. A chance to experience the new without burning the old." },
-          { topic: "Risk", value: "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities." }
+          { topic: "Growing Edge", value: "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities." }
         ]}
       }
     };
@@ -506,6 +535,8 @@
         document.body.style.background = outcomes[chosenOutcome].bg;
         app.innerHTML = renderOutcomeView();
       }
+
+      generateStickers();
     }
 
     function renderTableView(section) {
@@ -667,6 +698,45 @@
       currentStep = 0;
       chosenOutcome = null;
       render();
+    }
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // === BACKGROUND STICKERS (new set each slide) ===
+    const STICKER_START = 450938;
+    const STICKER_TOTAL = 120;
+    const STICKER_COUNT = 25;
+
+    function generateStickers() {
+      const container = document.getElementById('bgStickers');
+
+      // Fade out existing
+      const existing = container.querySelectorAll('.bg-sticker');
+      existing.forEach(el => el.classList.add('fading'));
+
+      setTimeout(() => {
+        container.innerHTML = '';
+
+        for (let i = 0; i < STICKER_COUNT; i++) {
+          const num = STICKER_START + Math.floor(Math.random() * STICKER_TOTAL);
+          const img = document.createElement('img');
+          img.className = 'bg-sticker';
+          img.src = `background_pics_stickers/file_${num}.webp`;
+
+          const size = 45 + Math.random() * 85; // 45-130px
+          img.style.width = size + 'px';
+          img.style.height = size + 'px';
+          img.style.top = (Math.random() * 85 + 5) + '%';
+          img.style.left = (Math.random() * 85 + 5) + '%';
+          img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+
+          container.appendChild(img);
+        }
+      }, 300);
     }
 
     // Keyboard
