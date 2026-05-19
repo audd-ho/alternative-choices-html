@@ -17,13 +17,16 @@
       justify-content: center;
       padding: 40px;
     }
-    .icon { font-size: 2.5rem; margin-bottom: 16px; }
     h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; color: #3d2020; }
     p { font-size: 1rem; color: rgba(80,40,40,0.55); margin-bottom: 40px; text-align: center; max-width: 420px; line-height: 1.5; }
     .links { display: flex; gap: 20px; }
     a {
-      display: block;
-      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      padding: 28px 24px;
       background: rgba(255,255,255,0.8);
       backdrop-filter: blur(8px);
       border: 2px solid rgba(255,255,255,0.9);
@@ -38,16 +41,14 @@
     }
     a:hover { background: #fff; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
     a span { display: block; font-size: 0.78rem; color: rgba(80,40,40,0.45); margin-top: 6px; font-weight: 500; }
-    a .link-icon { font-size: 1.5rem; margin-bottom: 8px; display: block; }
   </style>
 </head>
 <body>
-  <div class="icon">🌈</div>
   <h1>Two Sides, One Story</h1>
   <p>Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way forward together.</p>
   <div class="links">
-    <a href="sequential.html"><span class="link-icon">🎯</span>Sequential<span>Click-through slides</span></a>
-    <a href="scrollable.html"><span class="link-icon">🌊</span>Scrollable<span>Flow through at your pace</span></a>
+    <a href="slides.html">Slides<span>Click through each part</span></a>
+    <a href="scrollable.html">Scrollable<span>Flow through at your pace</span></a>
   </div>
 </body>
 </html>
