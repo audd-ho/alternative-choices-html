@@ -1,8 +1,8 @@
 {
-  "title": "Two Sides, A Story",
-  "description": "Understanding starts with seeing both perspectives. Pick a format and explore how two people find their way OR NOT [:(] forward together.",
+  "title": "Two Sides, One Story",
+  "description": "Understanding starts with seeing both perspectives. Try to find their way forward (or not...) together.",
   "person_a": {
-    "name": "A",
+    "name": "Germaine",
     "tagline": "Wants to end this connection",
     "avatar": "people/A.webp"
   },
@@ -14,73 +14,33 @@
   "phases": [
     {
       "name": "Before The Conversation",
-      "title": "Where They Stand",
-      "description": "Where each person stands before they've tried to bridge the gap.",
+      "title": "Where They Stand (Coming into the Conversation)",
+      "description": "Where each person stands before, and coming into the conversation.",
       "topics": {
         "Current Opinion": {
           "status": "different",
-          "A": "We've outgrown this place. There's more out there — new people, new energy. Staying feels like settling.",
-          "B": "This is home. We've built something real here — friendships, routines, a life that works. Why throw that away?"
+          "A": "B wants his way too often. He is too pushy and keeps overstepping boundaries. I feel like this connection does not bring my joy and is draining me. I don't want to maintain this connection and I see no point in continuing.",
+          "B": "I want to mend this relationship because I care about this connection. I have reflected on my actions and know I can change in the way needed because I value our relationship. I am willing to listen and make changes if necessary as well, but I hope that Germaine can also see the value in what we have together. I understand that Germaine has concerns, but I also feel that there is potential for growth and improvement in our relationship."
         },
         "What They Want": {
           "status": "different",
-          "A": "A fresh start. New environment, new challenges. That spark of possibility you only get when everything is unfamiliar.",
-          "B": "Stability and depth. I want to keep investing in what we have. Roots take time, and I'm not done growing here."
+          "A": "The relationship to end after this.",
+          "B": "The issues can be resolved and have the chance to work hard towards a future that allows us to maintain our connection. (So we can have casual light hearted talks and go together for sifa, theatre, photography, etc.)"
         },
         "What They Expect": {
-          "status": "close",
-          "A": "I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.",
-          "B": "I expect us to appreciate what we have before chasing what we don't. I expect we won't decide from restlessness."
-        },
-        "A": {
           "status": "different",
-          "A": "BU YAO",
-          "B": "YAO"
+          "A": "A short conversation to clear up anything left unsaid.",
+          "B": "A long and deep conversation where we can both express our feelings and concerns/problems so it can be resolved."
         },
-        "B": {
+        "How They See the Future of this Relationship": {
           "status": "different",
-          "A": "NO",
-          "B": "YES"
+          "A": "Meaningless.",
+          "B": "Meaningful (got value and potential to grow and be better)."
         },
-        "C": {
+        "Friends?": {
           "status": "different",
-          "A": "NEVER",
-          "B": "CHANCE"
-        },
-        "D": {
-          "status": "different",
-          "A": "ZERO",
-          "B": "ONCE"
-        },
-        "E": {
-          "status": "different",
-          "A": "PRESENT",
-          "B": "FUTURE"
-        },
-        "F": {
-          "status": "different",
-          "A": "BU YAO",
-          "B": "YAO"
-        },
-        "G": {
-          "status": "different",
-          "A": "NO",
-          "B": "YES"
-        },
-        "H": {
-          "status": "different",
-          "A": "NEVER",
-          "B": "CHANCE"
-        },
-        "I": {
-          "status": "different",
-          "A": "ZERO",
-          "B": "ONCE"
-        },
-        "J": {
-          "status": "different",
-          "A": "PRESENT",
-          "B": "FUTURE"
+          "A": "不要，没理由，不想再见了，浪费时间",
+          "B": "要，虽然不想失去这个朋友了，但如果真的不行了，还是希望能保持朋友关系的。"
         }
       }
     },
