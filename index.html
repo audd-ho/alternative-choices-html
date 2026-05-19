@@ -1,0 +1,433 @@
+git<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Path</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.6s ease;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating decorative shapes */
+    .shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) { width: 80px; height: 80px; background: #fff; top: 10%; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 120px; height: 120px; background: #fff; top: 60%; left: 80%; animation-delay: 1s; }
+    .shape:nth-child(3) { width: 60px; height: 60px; background: #fff; top: 80%; left: 20%; animation-delay: 2s; }
+    .shape:nth-child(4) { width: 100px; height: 100px; background: #fff; top: 20%; left: 70%; animation-delay: 3s; }
+    .shape:nth-child(5) { width: 50px; height: 50px; background: #fff; top: 50%; left: 50%; animation-delay: 4s; }
+    .shape:nth-child(6) { width: 90px; height: 90px; background: #fff; top: 35%; left: 5%; animation-delay: 1.5s; border-radius: 30%; }
+    .shape:nth-child(7) { width: 70px; height: 70px; background: #fff; top: 75%; left: 65%; animation-delay: 2.5s; border-radius: 20%; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    /* Back button */
+    .back-btn {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 100;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-10px);
+    }
+
+    .back-btn.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.05);
+    }
+
+    .back-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 10px 20px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.85rem;
+      font-weight: 400;
+      max-width: 50vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255,255,255,0.95);
+      border-radius: 32px;
+      padding: 48px;
+      max-width: 560px;
+      width: 90vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+      text-align: center;
+      animation: cardIn 0.5s ease forwards;
+    }
+
+    .card.exit {
+      animation: cardOut 0.3s ease forwards;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes cardOut {
+      from { opacity: 1; transform: scale(1) translateY(0); }
+      to { opacity: 0; transform: scale(0.9) translateY(-20px); }
+    }
+
+    .card h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #2d2d2d;
+    }
+
+    .card .emoji {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    /* Choice buttons */
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .choice-btn {
+      background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+      border: none;
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .choice-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .choice-btn:nth-child(1) { --btn-start: #ff6b6b; --btn-end: #ee5a24; }
+    .choice-btn:nth-child(2) { --btn-start: #4ecdc4; --btn-end: #44bd9e; }
+    .choice-btn:nth-child(3) { --btn-start: #a55eea; --btn-end: #8854d0; }
+    .choice-btn:nth-child(4) { --btn-start: #fd9644; --btn-end: #e67e22; }
+
+    /* Start over button */
+    .restart-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 16px 40px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      margin-top: 8px;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .restart-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .card {
+        padding: 32px 24px;
+        border-radius: 24px;
+      }
+
+      .card h1 {
+        font-size: 1.6rem;
+      }
+
+      .breadcrumb {
+        display: none;
+      }
+
+      .choice-btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
+  <div class="breadcrumb" id="breadcrumb"></div>
+
+  <div class="card" id="card"></div>
+
+  <script>
+    // === SLIDE DATA ===
+    const slides = {
+      start: {
+        emoji: "🌟",
+        title: "Choose Your Adventure!",
+        body: "Welcome, explorer! Where would you like to go?",
+        bg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        choices: [
+          { label: "Enter the Enchanted Forest", target: "forest" },
+          { label: "Explore the Neon City", target: "city" },
+          { label: "Blast Off to Space", target: "space" }
+        ]
+      },
+
+      // === FOREST BRANCH ===
+      forest: {
+        emoji: "🌲",
+        title: "The Enchanted Forest",
+        body: "Tall trees tower above you. Fireflies dance between the branches. You hear a stream nearby and notice smoke rising from a distant chimney.",
+        bg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
+        choices: [
+          { label: "Follow the smoke to the cabin", target: "cabin" },
+          { label: "Wade into the glowing river", target: "river" }
+        ]
+      },
+      cabin: {
+        emoji: "🏠",
+        title: "The Cozy Cabin",
+        body: "A friendly wizard welcomes you inside! The cabin is filled with bubbling potions and floating books. He offers you a warm cup of starlight tea and shares tales of the forest's ancient magic.",
+        bg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        choices: []
+      },
+      river: {
+        emoji: "🌊",
+        title: "The Crystal River",
+        body: "The water glows a soft turquoise. Fish made of pure light swim around your feet. You follow the river to a hidden waterfall that reveals a secret grotto full of luminescent crystals.",
+        bg: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        choices: []
+      },
+
+      // === CITY BRANCH ===
+      city: {
+        emoji: "🏙️",
+        title: "Neon City",
+        body: "Holographic billboards flash above you. Flying cars zoom between towers of glass. A jazzy beat drifts from a rooftop bar, while the aroma of fresh coffee pulls you toward a cozy cafe.",
+        bg: "linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)",
+        choices: [
+          { label: "Grab coffee at the retro cafe", target: "cafe" },
+          { label: "Head up to the rooftop party", target: "rooftop" }
+        ]
+      },
+      cafe: {
+        emoji: "☕",
+        title: "The Retro Cafe",
+        body: "Vinyl records line the walls. A robot barista serves you a perfectly crafted espresso that shifts colors as you drink it. You strike up a conversation with a time-traveler at the next table.",
+        bg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
+        choices: []
+      },
+      rooftop: {
+        emoji: "🎉",
+        title: "Rooftop Party!",
+        body: "The whole city sparkles below you. A DJ plays music that makes the stars dance. You meet artists, inventors, and dreamers from every corner of the galaxy. Best night ever!",
+        bg: "linear-gradient(135deg, #e44d26 0%, #f16529 50%, #fc6e51 100%)",
+        choices: []
+      },
+
+      // === SPACE BRANCH ===
+      space: {
+        emoji: "🚀",
+        title: "Outer Space",
+        body: "Your rocket shoots through the atmosphere! Stars streak past the windows. Two destinations appear on your navigation screen.",
+        bg: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        choices: [
+          { label: "Land on the Moon", target: "moon" },
+          { label: "Journey to Mars", target: "mars" }
+        ]
+      },
+      moon: {
+        emoji: "🌙",
+        title: "The Moon",
+        body: "You bounce across the lunar surface in low gravity! In a crater, you discover an ancient alien library filled with the history of the universe, written in shimmering stardust.",
+        bg: "linear-gradient(135deg, #2c3e50 0%, #bdc3c7 100%)",
+        choices: []
+      },
+      mars: {
+        emoji: "🔴",
+        title: "Mars Colony",
+        body: "A thriving colony greets you with open arms. Domed gardens grow impossible fruits, and the sunset paints the sky in shades of pink and purple you've never seen before.",
+        bg: "linear-gradient(135deg, #eb3349 0%, #f45c43 100%)",
+        choices: []
+      }
+    };
+
+    // === STATE ===
+    let history = [];
+    let currentSlide = "start";
+
+    // === RENDER ===
+    function renderSlide(id, direction = "forward") {
+      const slide = slides[id];
+      const card = document.getElementById("card");
+      const backBtn = document.getElementById("backBtn");
+      const breadcrumb = document.getElementById("breadcrumb");
+
+      // Animate out
+      card.classList.add("exit");
+
+      setTimeout(() => {
+        // Update background
+        document.body.style.background = slide.bg;
+
+        // Build card content
+        let html = `<span class="emoji">${slide.emoji}</span>`;
+        html += `<h1>${slide.title}</h1>`;
+        html += `<p>${slide.body}</p>`;
+
+        if (slide.choices.length > 0) {
+          html += `<div class="choices">`;
+          slide.choices.forEach(choice => {
+            html += `<button class="choice-btn" onclick="navigate('${choice.target}')">${choice.label}</button>`;
+          });
+          html += `</div>`;
+        } else {
+          // End slide
+          html += `<button class="restart-btn" onclick="startOver()">Start Over</button>`;
+        }
+
+        card.innerHTML = html;
+        card.classList.remove("exit");
+
+        // Reset animation
+        card.style.animation = "none";
+        card.offsetHeight; // trigger reflow
+        card.style.animation = "";
+
+        // Back button visibility
+        if (history.length > 0) {
+          backBtn.classList.add("visible");
+        } else {
+          backBtn.classList.remove("visible");
+        }
+
+        // Breadcrumb
+        const trail = [...history, id].map(sid => slides[sid].title);
+        breadcrumb.textContent = trail.join("  ›  ");
+
+      }, direction === "forward" ? 300 : 250);
+    }
+
+    function navigate(target) {
+      history.push(currentSlide);
+      currentSlide = target;
+      renderSlide(target, "forward");
+    }
+
+    function goBack() {
+      if (history.length === 0) return;
+      currentSlide = history.pop();
+      renderSlide(currentSlide, "back");
+    }
+
+    function startOver() {
+      history = [];
+      currentSlide = "start";
+      renderSlide("start", "forward");
+    }
+
+    // === INIT ===
+    renderSlide("start");
+  </script>
+</body>
+</html>
