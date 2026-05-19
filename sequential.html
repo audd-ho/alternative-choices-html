@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Sides — Sequential</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0f0f12;
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+
+    /* === SPLIT LAYOUT === */
+    .split-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .side-a {
+      background: linear-gradient(180deg, #1a1020 0%, #0f0f12 100%);
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .side-b {
+      background: linear-gradient(180deg, #0f1a20 0%, #0f0f12 100%);
+    }
+
+    /* Side accent bars */
+    .side-a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57);
+    }
+
+    .side-b::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4ecdc4, #44bd9e);
+    }
+
+    /* Person header */
+    .person-header {
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .person-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .side-a .person-name { color: #ff6b6b; }
+    .side-b .person-name { color: #4ecdc4; }
+
+    .person-role {
+      font-size: 0.85rem;
+      color: #888;
+      font-weight: 400;
+    }
+
+    /* Content rows */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: fadeSlideIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .row-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .row-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      opacity: 0.5;
+    }
+
+    .row-value {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .side-a .row-label { color: #ff6b6b; }
+    .side-b .row-label { color: #4ecdc4; }
+
+    /* Matching/conflicting indicators */
+    .row-item.conflict { border-left: 3px solid #ff4757; }
+    .row-item.aligned { border-left: 3px solid #2ed573; }
+    .row-item.partial { border-left: 3px solid #ffa502; }
+
+    .row-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .row-tag.conflict-tag { background: rgba(255,71,87,0.15); color: #ff4757; }
+    .row-tag.aligned-tag { background: rgba(46,213,115,0.15); color: #2ed573; }
+    .row-tag.partial-tag { background: rgba(255,165,2,0.15); color: #ffa502; }
+
+    /* === CENTER DIVIDER === */
+    .center-divider {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100vh;
+      background: rgba(255,255,255,0.08);
+      z-index: 50;
+    }
+
+    .center-divider::after {
+      content: 'VS';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a2e;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #666;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 8px 12px;
+      border-radius: 20px;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(15,15,18,0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: #a55eea;
+      border-color: #a55eea;
+      box-shadow: 0 0 10px rgba(165,94,234,0.4);
+    }
+
+    .nav-dot.visited {
+      background: rgba(165,94,234,0.3);
+      border-color: rgba(165,94,234,0.5);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .nav-btn.prev {
+      background: rgba(255,255,255,0.08);
+      color: #aaa;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-btn.prev:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .nav-btn.next {
+      background: linear-gradient(135deg, #a55eea, #8854d0);
+      color: #fff;
+    }
+
+    .nav-btn.next:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(165,94,234,0.3); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    /* === CHOICE SCREEN (result selection) === */
+    .choice-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(15,15,18,0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeSlideIn 0.4s ease forwards;
+      opacity: 0;
+      padding: 40px;
+    }
+
+    .choice-overlay h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .choice-overlay .choice-sub {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 40px;
+    }
+
+    .choice-options {
+      display: flex;
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .choice-card {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .choice-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .choice-card.card-a:hover { border-color: rgba(255,107,107,0.5); box-shadow: 0 8px 30px rgba(255,107,107,0.1); }
+    .choice-card.card-b:hover { border-color: rgba(78,205,196,0.5); box-shadow: 0 8px 30px rgba(78,205,196,0.1); }
+    .choice-card.card-c:hover { border-color: rgba(165,94,234,0.5); box-shadow: 0 8px 30px rgba(165,94,234,0.1); }
+
+    .choice-card .choice-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .choice-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .choice-card p {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    /* === RESULT OUTCOME TAGS === */
+    .outcome-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .outcome-tag.positive { background: rgba(46,213,115,0.12); color: #2ed573; }
+    .outcome-tag.neutral { background: rgba(255,165,2,0.12); color: #ffa502; }
+    .outcome-tag.negative { background: rgba(255,71,87,0.12); color: #ff4757; }
+
+    /* Hide scrollbar */
+    .side::-webkit-scrollbar { width: 4px; }
+    .side::-webkit-scrollbar-track { background: transparent; }
+    .side::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .split-container { flex-direction: column; height: auto; min-height: 100vh; }
+      .side { padding: 24px 20px; padding-bottom: 80px; }
+      .center-divider { display: none; }
+      .side-a { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .choice-options { flex-direction: column; }
+      .bottom-nav { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center-divider"></div>
+
+  <div class="split-container" id="splitContainer">
+    <div class="side side-a" id="sideA"></div>
+    <div class="side side-b" id="sideB"></div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-section-label" id="sectionLabel">PRE</div>
+    <div class="nav-dots" id="navDots"></div>
+    <div class="nav-buttons">
+      <button class="nav-btn prev" id="prevBtn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn next" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    // === SCENARIO DATA ===
+    const personA = { name: "Alex", color: "#ff6b6b" };
+    const personB = { name: "Jordan", color: "#4ecdc4" };
+
+    // Scenario: Two people deciding whether to move cities or stay
+    const sections = [
+      {
+        id: "pre",
+        label: "PRE — Where They Stand",
+        rows: [
+          {
+            label: "Current Opinion",
+            status: "conflict",
+            a: "We've outgrown this place. There's more out there for us — new people, new energy, new opportunities. Staying feels like settling.",
+            b: "This is home. We've built something real here — friendships, routines, a life that works. Why throw that away for something uncertain?"
+          },
+          {
+            label: "What They Want",
+            status: "conflict",
+            a: "A fresh start. New environment, new challenges. I want to feel that spark of possibility again — the one you only get when everything is unfamiliar.",
+            b: "Stability and depth. I want to keep investing in what we already have. Roots take time, and I'm not done growing here yet."
+          },
+          {
+            label: "What They Expect",
+            status: "partial",
+            a: "I expect us to be honest about feeling stuck. I expect that we'll take a real chance instead of defaulting to comfort.",
+            b: "I expect us to appreciate what we have before chasing what we don't. I expect that we won't make a decision out of restlessness."
+          },
+          {
+            label: "How They'd Get There",
+            status: "conflict",
+            a: "Research cities, set a timeline, start applying for jobs remotely. Make it real — not just a daydream. Commit to a date.",
+            b: "Double down here. Join new communities, explore parts of the city we've ignored, reinvest in relationships. Bloom where we're planted."
+          }
+        ]
+      },
+      {
+        id: "present",
+        label: "PRESENT — What They're Saying",
+        rows: [
+          {
+            label: "What They're Trying to Say",
+            status: "partial",
+            a: "I'm not running away from us — I'm running toward something. I want us to grow, and I'm scared that staying still means shrinking.",
+            b: "I'm not afraid of change — I'm protecting something valuable. I want us to be intentional, not impulsive. What we have deserves that respect."
+          },
+          {
+            label: "Why It Matters to Them",
+            status: "aligned",
+            a: "Because I love us enough to want the best version of our life. And I worry that 'good enough' becomes a cage if we never test it.",
+            b: "Because I love us enough to fight for what's working. And I worry that always chasing 'better' means never being present in 'now.'"
+          },
+          {
+            label: "How They Want to Resolve It",
+            status: "partial",
+            a: "I want us to try — even temporarily. A trial period, a test run. Give the new thing a real shot before deciding it's not for us.",
+            b: "I want us to slow down and explore why we feel this way first. If we do move, I want it to come from clarity — not from restlessness or fear of missing out."
+          }
+        ]
+      }
+    ];
+
+    // Three possible outcomes
+    const outcomes = {
+      a: {
+        title: "Alex's Path — They Move",
+        a: {
+          tag: "positive",
+          tagLabel: "Energised",
+          points: [
+            { label: "Feeling", value: "Alive. Validated. Like the world opened up and proved that taking the leap was worth it." },
+            { label: "Gained", value: "New perspective, new network, renewed sense of possibility. The relationship feels dynamic again." },
+            { label: "Risk", value: "If it doesn't work, the 'I told you so' will be hard to carry. The pressure to make it worth the sacrifice." }
+          ]
+        },
+        b: {
+          tag: "neutral",
+          tagLabel: "Adapting",
+          points: [
+            { label: "Feeling", value: "Uprooted but trying. There's grief for what was left behind, mixed with cautious curiosity about what's ahead." },
+            { label: "Gained", value: "Proof of flexibility. The knowledge that they can adapt. A deeper understanding of what 'home' actually means to them." },
+            { label: "Risk", value: "Resentment if things go badly. A lingering feeling of not being heard. The quiet weight of compromise." }
+          ]
+        }
+      },
+      b: {
+        title: "Jordan's Path — They Stay",
+        a: {
+          tag: "neutral",
+          tagLabel: "Restless",
+          points: [
+            { label: "Feeling", value: "Contained. Grateful for stability but haunted by 'what if.' The itch doesn't disappear — it just goes underground." },
+            { label: "Gained", value: "Security. The comfort of the known. Time to figure out if the urge to leave was about geography or something internal." },
+            { label: "Risk", value: "The dream becomes a sore spot. Every bad day becomes 'evidence' that they should have left. Quiet blame." }
+          ]
+        },
+        b: {
+          tag: "positive",
+          tagLabel: "Grounded",
+          points: [
+            { label: "Feeling", value: "Relieved. Grateful. Like the foundation held. Now there's space to build upward without the anxiety of losing everything." },
+            { label: "Gained", value: "Deeper roots, stronger community, the satisfaction of choosing depth over novelty." },
+            { label: "Risk", value: "Guilt about 'winning.' Anxiety that Alex might resent the choice, even if they agreed to it." }
+          ]
+        }
+      },
+      compromise: {
+        title: "The Compromise — A Trial Run",
+        a: {
+          tag: "positive",
+          tagLabel: "Hopeful",
+          points: [
+            { label: "Feeling", value: "Heard. The door is open, not slammed shut. Even a trial means the possibility is real — and that's enough for now." },
+            { label: "Gained", value: "A concrete plan instead of a daydream. Agency. The feeling of moving forward together rather than pulling apart." },
+            { label: "Risk", value: "If the trial succeeds, the permanence question returns. If it fails, was it enough of a real try?" }
+          ]
+        },
+        b: {
+          tag: "positive",
+          tagLabel: "Respected",
+          points: [
+            { label: "Feeling", value: "Safe. A trial has an exit ramp — it's not a one-way door. The stakes feel manageable. This feels fair." },
+            { label: "Gained", value: "Time. Data. A chance to experience the new without burning the old. A decision made from experience, not speculation." },
+            { label: "Risk", value: "Limbo. Two half-lives instead of one whole one. The exhaustion of holding two realities at once." }
+          ]
+        }
+      }
+    };
+
+    // === STATE ===
+    let currentSection = 0;
+    let chosenOutcome = null;
+
+    // === RENDER ===
+    function render() {
+      const sideA = document.getElementById("sideA");
+      const sideB = document.getElementById("sideB");
+      const sectionLabel = document.getElementById("sectionLabel");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      // Remove any choice overlay
+      const existingOverlay = document.querySelector('.choice-overlay');
+      if (existingOverlay) existingOverlay.remove();
+
+      if (currentSection < sections.length) {
+        // PRE or PRESENT
+        const section = sections[currentSection];
+        sectionLabel.textContent = section.label;
+
+        sideA.innerHTML = buildSide(personA, section.rows, 'a');
+        sideB.innerHTML = buildSide(personB, section.rows, 'b');
+
+        prevBtn.disabled = currentSection === 0;
+        nextBtn.textContent = currentSection < sections.length - 1 ? 'Next →' : 'See Outcomes →';
+        nextBtn.disabled = false;
+
+      } else if (currentSection === sections.length && !chosenOutcome) {
+        // CHOICE SCREEN
+        sectionLabel.textContent = "CHOOSE — Whose Path?";
+        sideA.innerHTML = '';
+        sideB.innerHTML = '';
+        showChoiceOverlay();
+        prevBtn.disabled = false;
+        nextBtn.disabled = true;
+        nextBtn.textContent = 'Choose above';
+
+      } else if (chosenOutcome) {
+        // RESULT
+        const outcome = outcomes[chosenOutcome];
+        sectionLabel.textContent = "RESULT — " + outcome.title;
+
+        sideA.innerHTML = buildOutcomeSide(personA, outcome.a, 'a');
+        sideB.innerHTML = buildOutcomeSide(personB, outcome.b, 'b');
+
+        prevBtn.disabled = false;
+        nextBtn.disabled = true;
+        nextBtn.textContent = 'End';
+      }
+
+      renderDots();
+    }
+
+    function buildSide(person, rows, side) {
+      const isA = side === 'a';
+      let html = `
+        <div class="person-header">
+          <div class="person-name">${person.name}</div>
+          <div class="person-role">${isA ? 'Wants change' : 'Wants stability'}</div>
+        </div>
+        <div class="content-area">
+      `;
+
+      rows.forEach(row => {
+        const statusClass = row.status;
+        const tagClass = row.status + '-tag';
+        const tagText = row.status === 'conflict' ? 'Differs' : row.status === 'aligned' ? 'Aligned' : 'Partial';
+
+        html += `
+          <div class="row-item ${statusClass}">
+            <span class="row-tag ${tagClass}">${tagText}</span>
+            <div class="row-label">${row.label}</div>
+            <div class="row-value">${row[side]}</div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      return html;
+    }
+
+    function buildOutcomeSide(person, data, side) {
+      const isA = side === 'a';
+      let html = `
+        <div class="person-header">
+          <div class="person-name">${person.name}</div>
+          <div class="person-role">${isA ? 'Their experience' : 'Their experience'}</div>
+        </div>
+        <div class="content-area">
+          <span class="outcome-tag ${data.tag}">${data.tagLabel}</span>
+      `;
+
+      data.points.forEach(point => {
+        html += `
+          <div class="row-item">
+            <div class="row-label">${point.label}</div>
+            <div class="row-value">${point.value}</div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      return html;
+    }
+
+    function showChoiceOverlay() {
+      const overlay = document.createElement('div');
+      overlay.className = 'choice-overlay';
+      overlay.innerHTML = `
+        <h2>What gets prioritised?</h2>
+        <p class="choice-sub">Each path leads to a different outcome for both of them.</p>
+        <div class="choice-options">
+          <div class="choice-card card-a" onclick="selectOutcome('a')">
+            <span class="choice-icon">🔥</span>
+            <h3>${personA.name}'s Way</h3>
+            <p>They move. Alex's desire for change takes priority. See how both experience it.</p>
+          </div>
+          <div class="choice-card card-b" onclick="selectOutcome('b')">
+            <span class="choice-icon">🌿</span>
+            <h3>${personB.name}'s Way</h3>
+            <p>They stay. Jordan's desire for stability takes priority. See how both experience it.</p>
+          </div>
+          <div class="choice-card card-c" onclick="selectOutcome('compromise')">
+            <span class="choice-icon">🤝</span>
+            <h3>Compromise</h3>
+            <p>A trial run — temporary move with a return option. Neither fully wins, neither fully loses.</p>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    function renderDots() {
+      const dotsContainer = document.getElementById("navDots");
+      const totalSteps = sections.length + 2; // pre, present, choice, result
+      let html = '';
+      for (let i = 0; i < totalSteps; i++) {
+        const active = (i === currentSection) || (i === sections.length + 1 && chosenOutcome);
+        const visited = i < currentSection || (chosenOutcome && i <= sections.length + 1);
+        html += `<div class="nav-dot ${active ? 'active' : ''} ${visited && !active ? 'visited' : ''}"></div>`;
+      }
+      dotsContainer.innerHTML = html;
+    }
+
+    // === NAVIGATION ===
+    function nextSlide() {
+      if (currentSection < sections.length) {
+        currentSection++;
+        render();
+      }
+    }
+
+    function prevSlide() {
+      if (chosenOutcome) {
+        chosenOutcome = null;
+        currentSection = sections.length;
+        render();
+      } else if (currentSection > 0) {
+        currentSection--;
+        render();
+      }
+    }
+
+    function selectOutcome(choice) {
+      chosenOutcome = choice;
+      currentSection = sections.length + 1;
+      render();
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // === INIT ===
+    render();
+  </script>
+</body>
+</html>
